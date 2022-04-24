@@ -1,0 +1,130 @@
+{% extends "view/base.html" %}
+{% block title %}Signup{% endblock %}
+{% block head %}
+{{super()}}
+<style>
+    body {
+        margin-top: 20px;
+        background: #f6f9fc;
+    }
+
+    .account-block {
+        padding: 0;
+        background-image: url({{url_for("static", filename="view/images/book-3.jpg")}}
+
+    );
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    position: relative;
+    }
+
+    .account-block .overlay {
+        -webkit-box-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .account-block .account-testimonial {
+        text-align: center;
+        color: #fff;
+        position: absolute;
+        margin: 0 auto;
+        padding: 0 1.75rem;
+        bottom: 3rem;
+        left: 0;
+        right: 0;
+    }
+
+    .text-theme {
+        color: #5369f8 !important;
+    }
+
+    .btn-theme {
+        background-color: #5369f8;
+        border-color: #5369f8;
+        color: #fff;
+    }
+
+    .mizan {
+        margin: 100px 400px;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div id="main-wrapper" class="container mizan">
+    <div class="row justify-content-center">
+        <div class="col-xl-10">
+            <div class="card border-0">
+                <div class="card-body p-0">
+                    <div class="row no-gutters">
+                        <div class="col-lg-6">
+                            <div class="p-5">
+                                <div class="mb-5">
+                                    <h3 class="h4 font-weight-bold text-theme">Signup</h3>
+                                </div>
+
+                                <h6 class="h5 mb-0">Welcome back!</h6>
+                                <p class="text-muted mt-2 mb-5">Enter your email address and password to access profile.
+                                </p>
+
+                                <form action="/signup" method="post" id="sForm">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">username</label>
+                                        <input type="text" name="username" class="form-control" id="exampleInputEmail1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Email</label>
+                                        <input type="email" name="email" class="form-control" id="exampleInputEmail1">
+                                    </div>
+                                    <div class="form-group mb-5">
+                                        <label for="exampleInputPassword1">Password</label>
+                                        <input type="password" name="password1" class="form-control" id="exampleInputPassword1">
+                                    </div>
+                                    <div class="form-group mb-5">
+                                        <label for="exampleInputPassword1">Confirm Password</label>
+                                        <input type="password" name="password2" class="form-control" id="exampleInputPassword1">
+                                    </div>
+                                    <button type="submit" form="sForm" class="btn btn-theme">Signup</button>
+                                    <a href="#l" class="forgot-link float-right text-primary">Forgot password?</a>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 d-none d-lg-inline-block">
+                            <div class="account-block rounded-right">
+                                <div class="overlay rounded-right"></div>
+                                <div class="account-testimonial">
+                                    <!-- <h4 class="text-white mb-4">Quote</h4> -->
+                                    <p class="lead text-white">"Books are the quietest and most constant of friends;
+                                        they are the most accessible and wisest of counselors, and the most patient of
+                                        teachers."</p>
+                                    <p>-Charles W. Eliot</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- end card-body -->
+            </div>
+            <!-- end card -->
+
+            <p class="text-muted text-center mt-3 mb-0">already haove account? <a href="/login"
+                    class="text-primary ml-1">Login</a></p>
+
+            <!-- end row -->
+
+        </div>
+        <!-- end col -->
+    </div>
+    <!-- Row -->
+</div>
+
+{% endblock %}

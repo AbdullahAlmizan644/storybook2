@@ -1,0 +1,121 @@
+{% extends "admin/base.html"%}
+{% block title %}users info{% endblock %}
+{% block head %}
+{{super ()}}
+<style>
+
+</style>
+{% endblock%}
+{% block content %}
+
+
+<div class="app-wrapper">
+
+
+
+    <div class="app-content pt-3 p-md-3 p-lg-4">
+        <div class="container-xl">
+
+            <div class="row g-3 mb-4 align-items-center justify-content-between">
+
+
+                <div class="col-auto">
+                    <h1 class="app-page-title mb-0">Users Details</h1>
+                </div>
+
+                <div class="row g-4 mb-4">
+                    <div class="col-6 col-lg-3">
+                        <div class="app-card app-card-stat shadow-sm h-100">
+                            <div class="app-card-body p-3 p-lg-4">
+                                <h4 class="stats-type mb-1">Total users</h4>
+                                <div class="stats-figure">{{ total_user.0 }}</div>
+                                <!-- <div class="stats-meta text-success">
+								<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up"
+									fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+									<path fill-rule="evenodd"
+										d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z" />
+								</svg> 20%
+							</div> -->
+                            </div>
+                            <!--//app-card-body-->
+                            <a class="app-card-link-mask" href="#"></a>
+                        </div>
+                        <!--//app-card-->
+                    </div>
+                    <!--//col-->
+                </div>
+
+                <!--//row-->
+
+
+
+                <div class="tab-content" id="orders-table-tab-content">
+                    <div class="tab-pane fade show active" id="orders-all" role="tabpanel"
+                        aria-labelledby="orders-all-tab">
+                        <div class="app-card app-card-orders-table shadow-sm mb-5">
+                            <div class="app-card-body">
+                                <div class="table-responsive">
+                                    <table class="table app-table-hover mb-0 text-left">
+                                        <thead>
+                                            <tr>
+                                                <th class="cell">sno</th>
+                                                <th class="cell">username</th>
+                                                <th class="cell">email</th>
+                                                <th class="cell">image</th>
+                                                <th class="cell">address</th>
+                                                <th class="cell">phone</th>
+                                                <th class="cell">date</th>
+                                                <th class="cell">block</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for user in users%}
+                                            <tr>
+                                                <td class="cell">{{user.0}}</td>
+                                                <td class="cell">{{user.1}}</td>
+                                                <td class="cell">{{user.2}}</td>
+                                                <td class="cell">{{user.3}}</td>
+                                                <td class="cell">{{user.4}}</td>
+                                                <td class="cell">{{user.5}}</td>
+                                                <td class="cell">{{user.7}}</td>
+                                                <td class="cell"><a href="/delete_user/{{user.0}}"> <span class="badge bg-danger">block</span></a></td>
+                                            </tr>
+                                            {% endfor %}
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!--//table-responsive-->
+
+                            </div>
+                            <!--//app-card-body-->
+                        </div>
+                        <!--//app-card-->
+                        <!-- <nav class="app-pagination">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                            </ul>
+                        </nav> -->
+                        <!--//app-pagination-->
+
+                    </div>
+                    <!--//tab-pane-->
+                    <!--//tab-pane-->
+                </div>
+                <!--//tab-content-->
+
+
+
+            </div>
+            <!--//container-fluid-->
+        </div>
+        <!--//app-content-->
+        {% endblock %}
