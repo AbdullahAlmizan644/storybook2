@@ -1,0 +1,80 @@
+{% extends "admin/base.html" %}
+{% block title %}Add Books{% endblock %}
+{% block head %}
+{{ super() }}
+<style>
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<main class="content">
+	<div class="container-fluid p-0">
+
+		<div class="mb-3">
+			<h1 class="h3 d-inline align-middle">Register book on shop</h1>
+		</div>
+
+		<form action="/add_book" id="book" method="post" enctype="multipart/form-data"> 
+
+			<div class="row">
+				<div class="col-12 col-lg-6">
+					<div class="card">
+						<div class="card-header">
+							<h5 class="card-title mb-0">book Name</h5>
+						</div>
+						<div class="card-body">
+							<input type="text" name="name" class="form-control" placeholder="Audiobook Name" required>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-header">
+							<h5 class="card-title mb-0">Description About book</h5>
+						</div>
+						<div class="card-body">
+							<textarea class="form-control" name="description" rows="10"
+								placeholder="Write details about book........" required></textarea>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-12 col-lg-6">
+					<div class="card">
+						<div class="card-header">
+							<h5 class="card-title mb-0">Price<h5>
+						</div>
+						<div class="card-body">
+							<input type="text" name="price"  class="form-control" placeholder="Price" required>
+						</div>
+					</div>
+
+
+					<div class="card">
+						<div class="card-header">
+							<h5 class="card-title mb-0">Upload book image or realated image<h5>
+						</div>
+						<div class="card-body">
+							<input type="file" name="image" class="form-control" required>
+						</div>
+					</div>
+
+
+					<div class="card">
+						<div class="card-header">
+							<h5 class="card-title mb-0">Save<h5>
+						</div>
+						<div class="card-body">
+							<button class="btn btn-primary" form="book">save and upload</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+
+	</div>
+</main>
+
+
+{% endblock %}

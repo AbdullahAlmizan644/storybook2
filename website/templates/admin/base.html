@@ -3,372 +3,645 @@
 
 <head>
     {% block head %}
-    <title>{% block title %}{% endblock %}-storybook</title>
-
-    <!-- Meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+    <meta name="author" content="AdminKit">
+    <meta name="keywords"
+        content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
-    <meta name="description" content="Portal - Bootstrap 5 Admin Dashboard Template For Developers">
-    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
-    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="shortcut icon" href="img/icons/icon-48x48.png" />
 
-    <!-- FontAwesome JS-->
-    <script defer src={{url_for("static", filename="admin/assets/plugins/fontawesome/js/all.min.js" )}}></script>
+    <link rel="canonical" href="https://demo-basic.adminkit.io/" />
 
-    <!-- App CSS -->
-    <link id="theme-style" rel="stylesheet" href={{url_for("static", filename="admin/assets/css/portal.css" )}}>
+    <title>{% block title %}{% endblock %}--Dashboard</title>
+
+    <link href={{url_for("static", filename="admin/css/app.css" )}} rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     {% endblock %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 
-<body class="app">
-    <header class="app-header fixed-top">
-        <div class="app-header-inner">
-            <div class="container-fluid py-2">
-                <div class="app-header-content">
-                    <div class="row justify-content-between align-items-center">
+<body>
+    <div class="wrapper">
+        <nav id="sidebar" class="sidebar js-sidebar">
+            <div class="sidebar-content js-simplebar">
+                <a class="sidebar-brand" href="/">
+                    <span class="align-middle">Storybook</span>
+                </a>
 
-                        <div class="col-auto">
-                            <a id="sidepanel-toggler" class="sidepanel-toggler d-inline-block d-xl-none" href="#">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
-                                    role="img">
-                                    <title>Menu</title>
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10"
-                                        stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path>
-                                </svg>
-                            </a>
-                        </div>
-                        <!--//col-->
-                        <div class="search-mobile-trigger d-sm-none col">
-                            <i class="search-mobile-trigger-icon fas fa-search"></i>
-                        </div>
-                        <!--//col-->
-                        <div class="app-search-box col">
-                            <form class="app-search-form">
-                                <input type="text" placeholder="Search..." name="search"
-                                    class="form-control search-input">
-                                <button type="submit" class="btn search-btn btn-primary" value="Search"><i
-                                        class="fas fa-search"></i></button>
-                            </form>
-                        </div>
-                        <!--//app-search-box-->
+                <ul class="sidebar-nav">
+                    <li class="sidebar-header">
+                        Pages
+                    </li>
 
-                        <div class="app-utilities col-auto">
+                    <li class="sidebar-item ">
+                        <a class="sidebar-link" href="/dashboard">
+                            <i class="align-middle" data-feather="sliders"></i> <span
+                                class="align-middle">Dashboard</span>
+                        </a>
+                    </li>
 
-                            <div class="app-utility-item app-user-dropdown dropdown">
-                                <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#"
-                                    role="button" aria-expanded="false"><img src={{url_for("static", filename="admin/assets/images/mizan.jpg")}}
-                                        alt="user profile"></a>
-                                <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
-                                    <!-- <li><a class="dropdown-item" href="account.html">Account</a></li> -->
-                                    <!-- <li><a class="dropdown-item" href="settings.html">Settings</a></li> -->
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="/admin_logout">Log Out</a></li>
-                                </ul>
-                            </div>
-                            <!--//app-user-dropdown-->
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="/all_user">
+                            <i class="align-middle" data-feather="user"></i> <span class="align-middle">User</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="/all_audiobook">
+                            <i class="align-middle" data-feather="book"></i> <span class="align-middle">audiobook</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="/all_podcast">
+                            <i class="align-middle" data-feather="mic"></i> <span class="align-middle">podcast</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="/all_book">
+                            <i class="align-middle" data-feather="book-open"></i> <span class="align-middle">Books</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="#">
+                            <i class="align-middle" data-feather="shopping-cart"></i> <span class="align-middle">orders</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="#">
+                            <i class="align-middle" data-feather="book"></i> <span class="align-middle">share books</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="#">
+                            <i class="align-middle" data-feather="shopping-bag"></i> <span class="align-middle">rent books</span>
+                        </a>
+                    </li>
+
+
+                    <!-- <li class="sidebar-item">
+                        <a class="sidebar-link" href="pages-profile.html">
+                            <i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="pages-sign-in.html">
+                            <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Sign In</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="pages-sign-up.html">
+                            <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Sign
+                                Up</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="pages-blank.html">
+                            <i class="align-middle" data-feather="book"></i> <span class="align-middle">Blank</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-header">
+                        Tools & Components
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="ui-buttons.html">
+                            <i class="align-middle" data-feather="square"></i> <span class="align-middle">Buttons</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="ui-forms.html">
+                            <i class="align-middle" data-feather="check-square"></i> <span
+                                class="align-middle">Forms</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="ui-cards.html">
+                            <i class="align-middle" data-feather="grid"></i> <span class="align-middle">Cards</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="ui-typography.html">
+                            <i class="align-middle" data-feather="align-left"></i> <span
+                                class="align-middle">Typography</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="icons-feather.html">
+                            <i class="align-middle" data-feather="coffee"></i> <span class="align-middle">Icons</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-header">
+                        Plugins & Addons
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="charts-chartjs.html">
+                            <i class="align-middle" data-feather="bar-chart-2"></i> <span
+                                class="align-middle">Charts</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="maps-google.html">
+                            <i class="align-middle" data-feather="map"></i> <span class="align-middle">Maps</span>
+                        </a>
+                    </li> -->
+                </ul>
+
+                <!-- <div class="sidebar-cta">
+                    <div class="sidebar-cta-content">
+                        <strong class="d-inline-block mb-2">Upgrade to Pro</strong>
+                        <div class="mb-3 text-sm">
+                            Are you looking for more components? Check out our premium version.
                         </div>
-                        <!--//app-utilities-->
+                        <div class="d-grid">
+                            <a href="upgrade-to-pro.html" class="btn btn-primary">Upgrade to Pro</a>
+                        </div>
                     </div>
-                    <!--//row-->
-                </div>
-                <!--//app-header-content-->
+                </div> -->
             </div>
-            <!--//container-fluid-->
-        </div>
-        <!--//app-header-inner-->
-        <div id="app-sidepanel" class="app-sidepanel">
-            <div id="sidepanel-drop" class="sidepanel-drop"></div>
-            <div class="sidepanel-inner d-flex flex-column">
-                <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
-                <div class="app-branding">
-                    <a class="app-logo" href="/"><img class="logo-icon me-2" src={{url_for("static", filename="admin/assets/images/app-logo.svg")}}
-                            alt="logo"><span class="logo-text">Home</a>
+        </nav>
 
-                </div>
-                <!--//app-branding-->
+        <div class="main">
+            <nav class="navbar navbar-expand navbar-light navbar-bg">
+                <a class="sidebar-toggle js-sidebar-toggle">
+                    <i class="hamburger align-self-center"></i>
+                </a>
 
-                <nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
-                    <ul class="app-menu list-unstyled accordion" id="menu-accordion">
-                        <li class="nav-item">
-                            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                            <a class="nav-link" href="/dashboard">
-                                <span class="nav-icon">
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-house-door"
-                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M7.646 1.146a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 .146.354v7a.5.5 0 0 1-.5.5H9.5a.5.5 0 0 1-.5-.5v-4H7v4a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .146-.354l6-6zM2.5 7.707V14H6v-4a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v4h3.5V7.707L8 2.207l-5.5 5.5z" />
-                                        <path fill-rule="evenodd"
-                                            d="M13 2.5V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
-                                    </svg>
-                                </span>
-                                <span class="nav-link-text">Dashboard</span>
+                <div class="navbar-collapse collapse">
+                    <ul class="navbar-nav navbar-align">
+                        <!-- <li class="nav-item dropdown">
+                            <a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
+                                <div class="position-relative">
+                                    <i class="align-middle" data-feather="bell"></i>
+                                    <span class="indicator">4</span>
+                                </div>
                             </a>
-                            <!--//nav-link-->
-                        </li>
-                        <!--//nav-item-->
-                        <!-- <li class="nav-item">
-                            
-                            <a class="nav-link" href="docs.html">
-                                <span class="nav-icon">
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-folder"
-                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M9.828 4a3 3 0 0 1-2.12-.879l-.83-.828A1 1 0 0 0 6.173 2H2.5a1 1 0 0 0-1 .981L1.546 4h-1L.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3v1z" />
-                                        <path fill-rule="evenodd"
-                                            d="M13.81 4H2.19a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4zM2.19 3A2 2 0 0 0 .198 5.181l.637 7A2 2 0 0 0 2.826 14h10.348a2 2 0 0 0 1.991-1.819l.637-7A2 2 0 0 0 13.81 3H2.19z" />
-                                    </svg>
-                                </span>
-                                <span class="nav-link-text">Docs</span>
-                            </a>
-                            
-                        </li> -->
-                        <!--//nav-item-->
-                        <li class="nav-item">
-                            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                            <a class="nav-link" href="/all_order">
-                                <span class="nav-icon">
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-list"
-                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
-                                        <path fill-rule="evenodd"
-                                            d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z" />
-                                        <circle cx="3.5" cy="5.5" r=".5" />
-                                        <circle cx="3.5" cy="8" r=".5" />
-                                        <circle cx="3.5" cy="10.5" r=".5" />
-                                    </svg>
-                                </span>
-                                <span class="nav-link-text">Orders</span>
-                            </a>
-                            <!--//nav-link-->
-                        </li>
-                        <li class="nav-item">
-                            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                            <a class="nav-link" href="/all_user">
-                                <span class="nav-icon">
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-code-square"
-                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
-                                        <path fill-rule="evenodd"
-                                            d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z" />
-                                        <circle cx="3.5" cy="5.5" r=".5" />
-                                        <circle cx="3.5" cy="8" r=".5" />
-                                        <circle cx="3.5" cy="10.5" r=".5" />
-                                    </svg>
-                                </span>
-                                <span class="nav-link-text">Users</span>
-                            </a>
-                            <!--//nav-link-->
-                        </li>
-                        <!--//nav-item-->
-                        <!-- <li class="nav-item has-submenu">
-                            
-                            <a class="nav-link submenu-toggle" href="#" data-bs-toggle="collapse"
-                                data-bs-target="#submenu-1" aria-expanded="false" aria-controls="submenu-1">
-                                <span class="nav-icon">
-                                    
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-files"
-                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M4 2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H4z" />
-                                        <path
-                                            d="M6 0h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2v-1a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H6a1 1 0 0 0-1 1H4a2 2 0 0 1 2-2z" />
-                                    </svg>
-                                </span>
-                                <span class="nav-link-text">Pages</span>
-                                <span class="submenu-arrow">
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down"
-                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
-                                    </svg>
-                                </span>
-                              
-                            </a>
-                            
-                            <div id="submenu-1" class="collapse submenu submenu-1" data-bs-parent="#menu-accordion">
-                                <ul class="submenu-list list-unstyled">
-                                    <li class="submenu-item"><a class="submenu-link"
-                                            href="notifications.html">Notifications</a></li>
-                                    <li class="submenu-item"><a class="submenu-link" href="account.html">Account</a>
-                                    </li>
-                                    <li class="submenu-item"><a class="submenu-link" href="settings.html">Settings</a>
-                                    </li>
-                                </ul>
+                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0"
+                                aria-labelledby="alertsDropdown">
+                                <div class="dropdown-menu-header">
+                                    4 New Notifications
+                                </div>
+                                <div class="list-group">
+                                    <a href="#" class="list-group-item">
+                                        <div class="row g-0 align-items-center">
+                                            <div class="col-2">
+                                                <i class="text-danger" data-feather="alert-circle"></i>
+                                            </div>
+                                            <div class="col-10">
+                                                <div class="text-dark">Update completed</div>
+                                                <div class="text-muted small mt-1">Restart server 12 to complete the
+                                                    update.</div>
+                                                <div class="text-muted small mt-1">30m ago</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <div class="row g-0 align-items-center">
+                                            <div class="col-2">
+                                                <i class="text-warning" data-feather="bell"></i>
+                                            </div>
+                                            <div class="col-10">
+                                                <div class="text-dark">Lorem ipsum</div>
+                                                <div class="text-muted small mt-1">Aliquam ex eros, imperdiet vulputate
+                                                    hendrerit et.</div>
+                                                <div class="text-muted small mt-1">2h ago</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <div class="row g-0 align-items-center">
+                                            <div class="col-2">
+                                                <i class="text-primary" data-feather="home"></i>
+                                            </div>
+                                            <div class="col-10">
+                                                <div class="text-dark">Login from 192.186.1.8</div>
+                                                <div class="text-muted small mt-1">5h ago</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <div class="row g-0 align-items-center">
+                                            <div class="col-2">
+                                                <i class="text-success" data-feather="user-plus"></i>
+                                            </div>
+                                            <div class="col-10">
+                                                <div class="text-dark">New connection</div>
+                                                <div class="text-muted small mt-1">Christina accepted your request.
+                                                </div>
+                                                <div class="text-muted small mt-1">14h ago</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="dropdown-menu-footer">
+                                    <a href="#" class="text-muted">Show all notifications</a>
+                                </div>
                             </div>
                         </li> -->
-                        <!--//nav-item-->
-                        <!-- <li class="nav-item has-submenu">
-                            
-                            <a class="nav-link submenu-toggle" href="#" data-bs-toggle="collapse"
-                                data-bs-target="#submenu-2" aria-expanded="false" aria-controls="submenu-2">
-                                <span class="nav-icon">
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-columns-gap"
-                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M6 1H1v3h5V1zM1 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1H1zm14 12h-5v3h5v-3zm-5-1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-5zM6 8H1v7h5V8zM1 7a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H1zm14-6h-5v7h5V1zm-5-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1h-5z" />
-                                    </svg>
-                                </span>
-                                <span class="nav-link-text">External</span>
-                                <span class="submenu-arrow">
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down"
-                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
-                                    </svg>
-                                </span>
-                               
+                        <!-- <li class="nav-item dropdown">
+                            <a class="nav-icon dropdown-toggle" href="#" id="messagesDropdown"
+                                data-bs-toggle="dropdown">
+                                <div class="position-relative">
+                                    <i class="align-middle" data-feather="message-square"></i>
+                                </div>
                             </a>
-                            
-                            <div id="submenu-2" class="collapse submenu submenu-2" data-bs-parent="#menu-accordion">
-                                <ul class="submenu-list list-unstyled">
-                                    <li class="submenu-item"><a class="submenu-link" href="login.html">Login</a></li>
-                                    <li class="submenu-item"><a class="submenu-link" href="signup.html">Signup</a></li>
-                                    <li class="submenu-item"><a class="submenu-link" href="reset-password.html">Reset
-                                            password</a></li>
-                                    <li class="submenu-item"><a class="submenu-link" href="404.html">404 page</a></li>
-                                </ul>
+                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0"
+                                aria-labelledby="messagesDropdown">
+                                <div class="dropdown-menu-header">
+                                    <div class="position-relative">
+                                        4 New Messages
+                                    </div>
+                                </div>
+                                <div class="list-group">
+                                    <a href="#" class="list-group-item">
+                                        <div class="row g-0 align-items-center">
+                                            <div class="col-2">
+                                                <img src={{url_for("static", filename="admin/img/avatars/avatar-5.jpg"
+                                                    )}} class="avatar img-fluid rounded-circle" alt="Vanessa Tucker">
+                                            </div>
+                                            <div class="col-10 ps-2">
+                                                <div class="text-dark">Vanessa Tucker</div>
+                                                <div class="text-muted small mt-1">Nam pretium turpis et arcu. Duis arcu
+                                                    tortor.</div>
+                                                <div class="text-muted small mt-1">15m ago</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <div class="row g-0 align-items-center">
+                                            <div class="col-2">
+                                                <img src={{url_for("static", filename="admin/img/avatars/avatar-5.jpg"
+                                                    )}} class="avatar img-fluid rounded-circle" alt="William Harris">
+                                            </div>
+                                            <div class="col-10 ps-2">
+                                                <div class="text-dark">William Harris</div>
+                                                <div class="text-muted small mt-1">Curabitur ligula sapien euismod
+                                                    vitae.</div>
+                                                <div class="text-muted small mt-1">2h ago</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <div class="row g-0 align-items-center">
+                                            <div class="col-2">
+                                                <img src={{url_for("static", filename="admin/img/avatars/avatar-5.jpg"
+                                                    )}} class="avatar img-fluid rounded-circle" alt="Christina Mason">
+                                            </div>
+                                            <div class="col-10 ps-2">
+                                                <div class="text-dark">Christina Mason</div>
+                                                <div class="text-muted small mt-1">Pellentesque auctor neque nec urna.
+                                                </div>
+                                                <div class="text-muted small mt-1">4h ago</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <div class="row g-0 align-items-center">
+                                            <div class="col-2">
+                                                <img src={{url_for("static", filename="admin/img/avatars/avatar-5.jpg"
+                                                    )}} class="avatar img-fluid rounded-circle" alt="Sharon Lessman">
+                                            </div>
+                                            <div class="col-10 ps-2">
+                                                <div class="text-dark">Sharon Lessman</div>
+                                                <div class="text-muted small mt-1">Aenean tellus metus, bibendum sed,
+                                                    posuere ac, mattis non.</div>
+                                                <div class="text-muted small mt-1">5h ago</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="dropdown-menu-footer">
+                                    <a href="#" class="text-muted">Show all messages</a>
+                                </div>
                             </div>
                         </li> -->
-                        <!--//nav-item-->
-
-
-                        <!-- <li class="nav-item">
-                            
-                            <a class="nav-link" href="charts.html">
-                                <span class="nav-icon">
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bar-chart-line"
-                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2zm1 12h2V2h-2v12zm-3 0V7H7v7h2zm-5 0v-3H2v3h2z" />
-                                    </svg>
-                                </span>
-                                <span class="nav-link-text">Charts</span>
-                            </a>
-                        
-                        </li> -->
-                        <!--//nav-item-->
-
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" href="help.html">
-                                <span class="nav-icon">
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-question-circle"
-                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                                        <path
-                                            d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
-                                    </svg>
-                                </span>
-                                <span class="nav-link-text">Help</span>
+                        <li class="nav-item dropdown">
+                            <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#"
+                                data-bs-toggle="dropdown">
+                                <i class="align-middle" data-feather="settings"></i>
                             </a>
 
-                        </li> -->
-
+                            <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#"
+                                data-bs-toggle="dropdown">
+                                <img src={{url_for("static", filename="image/mizan.jpg" )}}
+                                    class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span
+                                    class="text-dark">Abdullah Al Mizan</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item" href="/admin_profile"><i class="align-middle me-1"
+                                        data-feather="user"></i> Profile</a>
+                                <!-- <a class="dropdown-item" href="#"><i class="align-middle me-1"
+                                        data-feather="pie-chart"></i> Analytics</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="index.html"><i class="align-middle me-1"
+                                        data-feather="settings"></i> Settings & Privacy</a>
+                                <a class="dropdown-item" href="#"><i class="align-middle me-1"
+                                        data-feather="help-circle"></i> Help Center</a>
+                                <div class="dropdown-divider"></div> -->
+                                <a class="dropdown-item" href="/admin_logout">Log out</a>
+                            </div>
+                        </li>
                     </ul>
-                    <!--//app-menu-->
-                </nav>
-                <!--//app-nav-->
-                <div class="app-sidepanel-footer">
-                    <nav class="app-nav app-nav-footer">
-                        <ul class="app-menu footer-menu list-unstyled">
-                            <li class="nav-item">
-                                <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                                <a class="nav-link" href="settings.html">
-                                    <span class="nav-icon">
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-gear"
-                                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd"
-                                                d="M8.837 1.626c-.246-.835-1.428-.835-1.674 0l-.094.319A1.873 1.873 0 0 1 4.377 3.06l-.292-.16c-.764-.415-1.6.42-1.184 1.185l.159.292a1.873 1.873 0 0 1-1.115 2.692l-.319.094c-.835.246-.835 1.428 0 1.674l.319.094a1.873 1.873 0 0 1 1.115 2.693l-.16.291c-.415.764.42 1.6 1.185 1.184l.292-.159a1.873 1.873 0 0 1 2.692 1.116l.094.318c.246.835 1.428.835 1.674 0l.094-.319a1.873 1.873 0 0 1 2.693-1.115l.291.16c.764.415 1.6-.42 1.184-1.185l-.159-.291a1.873 1.873 0 0 1 1.116-2.693l.318-.094c.835-.246.835-1.428 0-1.674l-.319-.094a1.873 1.873 0 0 1-1.115-2.692l.16-.292c.415-.764-.42-1.6-1.185-1.184l-.291.159A1.873 1.873 0 0 1 8.93 1.945l-.094-.319zm-2.633-.283c.527-1.79 3.065-1.79 3.592 0l.094.319a.873.873 0 0 0 1.255.52l.292-.16c1.64-.892 3.434.901 2.54 2.541l-.159.292a.873.873 0 0 0 .52 1.255l.319.094c1.79.527 1.79 3.065 0 3.592l-.319.094a.873.873 0 0 0-.52 1.255l.16.292c.893 1.64-.902 3.434-2.541 2.54l-.292-.159a.873.873 0 0 0-1.255.52l-.094.319c-.527 1.79-3.065 1.79-3.592 0l-.094-.319a.873.873 0 0 0-1.255-.52l-.292.16c-1.64.893-3.433-.902-2.54-2.541l.159-.292a.873.873 0 0 0-.52-1.255l-.319-.094c-1.79-.527-1.79-3.065 0-3.592l.319-.094a.873.873 0 0 0 .52-1.255l-.16-.292c-.892-1.64.902-3.433 2.541-2.54l.292.159a.873.873 0 0 0 1.255-.52l.094-.319z" />
-                                            <path fill-rule="evenodd"
-                                                d="M8 5.754a2.246 2.246 0 1 0 0 4.492 2.246 2.246 0 0 0 0-4.492zM4.754 8a3.246 3.246 0 1 1 6.492 0 3.246 3.246 0 0 1-6.492 0z" />
-                                        </svg>
-                                    </span>
-                                    <span class="nav-link-text">Settings</span>
-                                </a>
-                                <!--//nav-link-->
-                            </li>
-                            <!--//nav-item-->
-                            <li class="nav-item">
-                                <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                                <!-- <a class="nav-link"
-                                    href="https://themes.3rdwavemedia.com/bootstrap-templates/admin-dashboard/portal-free-bootstrap-admin-dashboard-template-for-developers/">
-                                    <span class="nav-icon">
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-download"
-                                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd"
-                                                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-                                            <path fill-rule="evenodd"
-                                                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
-                                        </svg>
-                                    </span>
-                                    <span class="nav-link-text">Download</span>
-                                </a> -->
-                                <!--//nav-link-->
-                            </li>
-                            <!--//nav-item-->
-                            <li class="nav-item">
-                                <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                                <!-- <a class="nav-link"
-                                    href="https://themes.3rdwavemedia.com/bootstrap-templates/admin-dashboard/portal-free-bootstrap-admin-dashboard-template-for-developers/">
-                                    <span class="nav-icon">
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-person"
-                                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd"
-                                                d="M12 1H4a1 1 0 0 0-1 1v10.755S4 11 8 11s5 1.755 5 1.755V2a1 1 0 0 0-1-1zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z" />
-                                            <path fill-rule="evenodd" d="M8 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                                        </svg>
-                                    </span>
-                                    <span class="nav-link-text">License</span>
-                                </a> -->
-                                <!--//nav-link-->
-                            </li>
-                            <!--//nav-item-->
-                        </ul>
-                        <!--//footer-menu-->
-                    </nav>
                 </div>
-                <!--//app-sidepanel-footer-->
+            </nav>
+            <br>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <ul class=flashes>
+                {% for category, message in messages %}
+                {% if category == "error"%}
+                <div class="alert alert-danger" role="alert">
+                    {{message}}
+                </div>
+                {% elif category=="success" %}
+                <div class="alert alert-success" role="alert">
+                    {{message}}
+                </div>
+                {% endif %}
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
 
-            </div>
-            <!--//sidepanel-inner-->
+
+            {% block content %} {% endblock %}
+
+
+
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row text-muted">
+                        <div class="col-6 text-start">
+                            <p class="mb-0">
+                                <a class="text-muted" href="/"
+                                    target="_blank"><strong>StoryBook</strong></a> &copy;
+                            </p>
+                        </div>
+                        <div class="col-6 text-end">
+                            <ul class="list-inline">
+                                <!-- <li class="list-inline-item">
+                                    <a class="text-muted" href="https://adminkit.io/" target="_blank">Support</a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class="text-muted" href="https://adminkit.io/" target="_blank">Help Center</a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class="text-muted" href="https://adminkit.io/" target="_blank">Privacy</a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class="text-muted" href="https://adminkit.io/" target="_blank">Terms</a>
+                                </li>
+                            </ul> -->
+                        </div>
+                    </div>
+                </div>
+            </footer>
         </div>
-        <!--//app-sidepanel-->
-    </header>
-    <!--//app-header-->
-
-    {% block content%} {% endblock %}
-
-
-
-    <footer class="app-footer">
-        <div class="container text-center py-3">
-            <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
-            <small class="copyright">create by Abdullah Al Mizan</small>
-
-        </div>
-    </footer>
-    <!--//app-footer-->
-
     </div>
-    <!--//app-wrapper-->
 
+    <script src={{url_for("static", filename="admin/js/app.js" )}}></script>
 
-    <!-- Javascript -->
-    <script src={{url_for("static", filename="admin/assets/plugins/popper.min.js" )}}></script>
-    <script src={{url_for("static", filename="admin/assets/plugins/bootstrap/js/bootstrap.min.js" )}}></script>
-
-    <!-- Charts JS -->
-    <script src={{url_for("static", filename="admin/assets/plugins/chart.js/chart.min.js" )}}></script>
-    <script src={{url_for("static", filename="admin/assets/js/index-charts.js" )}}></script>
-
-    <!-- Page Specific JS -->
-    <script src={{url_for("static", filename="admin/assets/js/app.js" )}}></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var ctx = document.getElementById("chartjs-dashboard-line").getContext("2d");
+            var gradient = ctx.createLinearGradient(0, 0, 0, 225);
+            gradient.addColorStop(0, "rgba(215, 227, 244, 1)");
+            gradient.addColorStop(1, "rgba(215, 227, 244, 0)");
+            // Line chart
+            new Chart(document.getElementById("chartjs-dashboard-line"), {
+                type: "line",
+                data: {
+                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                    datasets: [{
+                        label: "Sales ($)",
+                        fill: true,
+                        backgroundColor: gradient,
+                        borderColor: window.theme.primary,
+                        data: [
+                            2115,
+                            1562,
+                            1584,
+                            1892,
+                            1587,
+                            1923,
+                            2566,
+                            2448,
+                            2805,
+                            3438,
+                            2917,
+                            3327
+                        ]
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    legend: {
+                        display: false
+                    },
+                    tooltips: {
+                        intersect: false
+                    },
+                    hover: {
+                        intersect: true
+                    },
+                    plugins: {
+                        filler: {
+                            propagate: false
+                        }
+                    },
+                    scales: {
+                        xAxes: [{
+                            reverse: true,
+                            gridLines: {
+                                color: "rgba(0,0,0,0.0)"
+                            }
+                        }],
+                        yAxes: [{
+                            ticks: {
+                                stepSize: 1000
+                            },
+                            display: true,
+                            borderDash: [3, 3],
+                            gridLines: {
+                                color: "rgba(0,0,0,0.0)"
+                            }
+                        }]
+                    }
+                }
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Pie chart
+            new Chart(document.getElementById("chartjs-dashboard-pie"), {
+                type: "pie",
+                data: {
+                    labels: ["Chrome", "Firefox", "IE"],
+                    datasets: [{
+                        data: [4306, 3801, 1689],
+                        backgroundColor: [
+                            window.theme.primary,
+                            window.theme.warning,
+                            window.theme.danger
+                        ],
+                        borderWidth: 5
+                    }]
+                },
+                options: {
+                    responsive: !window.MSInputMethodContext,
+                    maintainAspectRatio: false,
+                    legend: {
+                        display: false
+                    },
+                    cutoutPercentage: 75
+                }
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Bar chart
+            new Chart(document.getElementById("chartjs-dashboard-bar"), {
+                type: "bar",
+                data: {
+                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                    datasets: [{
+                        label: "This year",
+                        backgroundColor: window.theme.primary,
+                        borderColor: window.theme.primary,
+                        hoverBackgroundColor: window.theme.primary,
+                        hoverBorderColor: window.theme.primary,
+                        data: [54, 67, 41, 55, 62, 45, 55, 73, 60, 76, 48, 79],
+                        barPercentage: .75,
+                        categoryPercentage: .5
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    legend: {
+                        display: false
+                    },
+                    scales: {
+                        yAxes: [{
+                            gridLines: {
+                                display: false
+                            },
+                            stacked: false,
+                            ticks: {
+                                stepSize: 20
+                            }
+                        }],
+                        xAxes: [{
+                            stacked: false,
+                            gridLines: {
+                                color: "transparent"
+                            }
+                        }]
+                    }
+                }
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var markers = [{
+                coords: [31.230391, 121.473701],
+                name: "Shanghai"
+            },
+            {
+                coords: [28.704060, 77.102493],
+                name: "Delhi"
+            },
+            {
+                coords: [6.524379, 3.379206],
+                name: "Lagos"
+            },
+            {
+                coords: [35.689487, 139.691711],
+                name: "Tokyo"
+            },
+            {
+                coords: [23.129110, 113.264381],
+                name: "Guangzhou"
+            },
+            {
+                coords: [40.7127837, -74.0059413],
+                name: "New York"
+            },
+            {
+                coords: [34.052235, -118.243683],
+                name: "Los Angeles"
+            },
+            {
+                coords: [41.878113, -87.629799],
+                name: "Chicago"
+            },
+            {
+                coords: [51.507351, -0.127758],
+                name: "London"
+            },
+            {
+                coords: [40.416775, -3.703790],
+                name: "Madrid "
+            }
+            ];
+            var map = new jsVectorMap({
+                map: "world",
+                selector: "#world_map",
+                zoomButtons: true,
+                markers: markers,
+                markerStyle: {
+                    initial: {
+                        r: 9,
+                        strokeWidth: 7,
+                        stokeOpacity: .4,
+                        fill: window.theme.primary
+                    },
+                    hover: {
+                        fill: window.theme.primary,
+                        stroke: window.theme.primary
+                    }
+                },
+                zoomOnScroll: false
+            });
+            window.addEventListener("resize", () => {
+                map.updateSize();
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var date = new Date(Date.now() - 5 * 24 * 60 * 60 * 1000);
+            var defaultDate = date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
+            document.getElementById("datetimepicker-dashboard").flatpickr({
+                inline: true,
+                prevArrow: "<span title=\"Previous month\">&laquo;</span>",
+                nextArrow: "<span title=\"Next month\">&raquo;</span>",
+                defaultDate: defaultDate
+            });
+        });
+    </script>
 
 </body>
 

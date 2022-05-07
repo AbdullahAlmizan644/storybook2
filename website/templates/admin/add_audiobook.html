@@ -1,0 +1,103 @@
+{% extends "admin/base.html" %}
+{% block title %}AudioBooks{% endblock %}
+{% block head %}
+{{ super() }}
+<style>
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<main class="content">
+	<div class="container-fluid p-0">
+
+		<div class="mb-3">
+			<h1 class="h3 d-inline align-middle">Register Audiobook</h1>
+		</div>
+
+		<form action="/add_audiobook" id="audiobook" method="post" enctype="multipart/form-data"> 
+
+			<div class="row">
+				<div class="col-12 col-lg-6">
+					<div class="card">
+						<div class="card-header">
+							<h5 class="card-title mb-0">Audiobook Name</h5>
+						</div>
+						<div class="card-body">
+							<input type="text" name="name" class="form-control" placeholder="Audiobook Name" required>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-header">
+							<h5 class="card-title mb-0">Upload Audio<h5>
+						</div>
+						<div class="card-body">
+							<input type="file" name="audio" class="form-control" required>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-header">
+							<h5 class="card-title mb-0">Description About Audiobook</h5>
+						</div>
+						<div class="card-body">
+							<textarea class="form-control" name="description" rows="10"
+								placeholder="Write details about audiobook........" required></textarea>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-12 col-lg-6">
+					<div class="card">
+						<div class="card-header">
+							<h5 class="card-title mb-0">Book writer<h5>
+						</div>
+						<div class="card-body">
+							<input type="text" name="writer"  class="form-control" placeholder="Writer Name" required>
+						</div>
+					</div>
+
+
+					<div class="card">
+						<div class="card-header">
+							<h5 class="card-title mb-0">Upload book image or realated image<h5>
+						</div>
+						<div class="card-body">
+							<input type="file" name="image" class="form-control" required>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-header">
+							<h5 class="card-title mb-0">Category</h5>
+						</div>
+						<div class="card-body">
+							<select name="category" class="form-select mb-3">
+								<option selected>থcategory</option>
+								<option>থ্রিলার</option>
+								<option>রোমান্টিক</option>
+								<option>ডিটেকটিভ </option>
+							</select>
+						</div>
+					</div>
+
+
+					<div class="card">
+						<div class="card-header">
+							<h5 class="card-title mb-0">Save<h5>
+						</div>
+						<div class="card-body">
+							<button class="btn btn-primary" form="audiobook">save and upload</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+
+	</div>
+</main>
+
+
+{% endblock %}

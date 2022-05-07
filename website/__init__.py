@@ -5,8 +5,8 @@ db=MySQL()
 
 
 def create_app():
-    UPLOAD_FOLDER = '/home/ares/my_project/website/static/image'
-    ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+    UPLOAD_FOLDER = '/home/z/storybook2/website/static/image'
+    ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif','mp3'}
     app=Flask(__name__)
     app.config['UPLOAD_FOLDER']=UPLOAD_FOLDER
     app.config['SECRET_KEY']='mizan_project'
