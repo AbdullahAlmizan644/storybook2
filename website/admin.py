@@ -1,4 +1,3 @@
-from unicodedata import category
 from flask import Blueprint, redirect, render_template,request,flash,session
 from website.__init__ import db,create_app
 import os
