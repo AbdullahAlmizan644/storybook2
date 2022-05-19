@@ -1,0 +1,94 @@
+{% extends "admin/base.html" %}
+{% block title %}edit Podcast{% endblock %}
+{% block head %}
+{{ super() }}
+<style>
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<main class="content">
+	<div class="container-fluid p-0">
+
+		<div class="mb-3">
+			<h1 class="h3 d-inline align-middle">Register Podcast</h1>
+		</div>
+
+		<form action="/edit_podcast/{{podcast.0}}" id="podcast" method="post" enctype="multipart/form-data"> 
+
+			<div class="row">
+				<div class="col-12 col-lg-6">
+					<div class="card">
+						<div class="card-header">
+							<h5 class="card-title mb-0">pocast Name</h5>
+						</div>
+						<div class="card-body">
+							<input type="text" value="{{podcast.1}}" name="name" class="form-control" placeholder="podcast Name" required>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-header">
+							<h5 class="card-title mb-0">Upload Audio<h5>
+						</div>
+						<div class="card-body">
+                            <h6>{{ podcast.4 }}</h6>
+							<input type="file" name="audio" class="form-control" required>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-header">
+							<h5 class="card-title mb-0">Description About podcast</h5>
+						</div>
+						<div class="card-body">
+							<textarea class="form-control" name="description" rows="10"
+								placeholder="Write details about podcast........" required>{{ podcast.2}}</textarea>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-12 col-lg-6">
+					<div class="card">
+						<div class="card-header">
+							<h5 class="card-title mb-0">Category</h5>
+						</div>
+						<div class="card-body">
+							<select name="podcaster" value="{{podcast.5}}" class="form-select mb-3">
+								<option>সোমক</option>
+								<option>অগ্নি</option>
+							</select>
+						</div>
+					</div>
+
+
+					<div class="card">
+						<div class="card-header">
+							<h5 class="card-title mb-0">Upload podcast image<h5>
+						</div>
+						<div class="card-body">
+                            <h6>{{podcast.3}}</h6>
+							<input type="file" name="image" class="form-control" required>
+						</div>
+					</div>
+
+
+					<div class="card">
+						<div class="card-header">
+							<h5 class="card-title mb-0">Save<h5>
+						</div>
+						<div class="card-body">
+							<button class="btn btn-primary" form="podcast">save and upload</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+
+	</div>
+</main>
+
+
+{% endblock %}

@@ -153,8 +153,8 @@ a:hover, a:focus {
 					<div class="text mt-5">
 						<span class="subheading">There is famous quote </span>
 						<h1>A reader lives a thousand lives before he dies</h1>
-						<p>----By gorge rr martin</p>
-						<p><a href="/shop" class="btn btn-primary py-3 px-4">Visit Book Shop</a></p>
+						<p>By <strong>gorge rr martin</strong></p>
+						<!-- <p><a href="/shop" class="btn btn-primary py-3 px-4">Visit Book Shop</a></p> -->
 					</div>
 				</div>
 			</div>
@@ -200,7 +200,7 @@ a:hover, a:focus {
 				<div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
 					<div class="block-18 bg-light">
 						<div class="text">
-							<strong class="number" data-number="200">0</strong>
+							<strong class="number" data-number="{{ total_books[0] }}">10</strong>
 							<span>Total Books</span>
 						</div>
 					</div>
@@ -208,7 +208,7 @@ a:hover, a:focus {
 				<div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
 					<div class="block-18 bg-light">
 						<div class="text">
-							<strong class="number" data-number="1200">0</strong>
+							<strong class="number" data-number="{{ total_audiobooks[0] }}">0</strong>
 							<span>Total AudioBooks</span>
 						</div>
 					</div>
@@ -216,7 +216,7 @@ a:hover, a:focus {
 				<div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
 					<div class="block-18 bg-light">
 						<div class="text">
-							<strong class="number" data-number="340">0</strong>
+							<strong class="number" data-number="{{ total_podcasts[0] }}">0</strong>
 							<span>Total Podcasts</span>
 						</div>
 					</div>
@@ -224,7 +224,7 @@ a:hover, a:focus {
 				<div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
 					<div class="block-18 bg-light">
 						<div class="text">
-							<strong class="number" data-number="120">0</strong>
+							<strong class="number" data-number="0">0</strong>
 							<span>Total rent</span>
 						</div>
 					</div>
@@ -238,7 +238,7 @@ a:hover, a:focus {
 				<div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
 					<div class="block-18 bg-light">
 						<div class="text">
-							<strong class="number" data-number="1100">0</strong>
+							<strong class="number" data-number="0">0</strong>
 							<span>Books Sold</span>
 						</div>
 					</div>
@@ -246,7 +246,7 @@ a:hover, a:focus {
 				<div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
 					<div class="block-18 bg-light">
 						<div class="text">
-							<strong class="number" data-number="1200">0</strong>
+							<strong class="number" data-number="0">0</strong>
 							<span>Share Books</span>
 						</div>
 					</div>
@@ -254,7 +254,7 @@ a:hover, a:focus {
 				<div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
 					<div class="block-18 bg-light">
 						<div class="text">
-							<strong class="number" data-number="340">0</strong>
+							<strong class="number" data-number="0">0</strong>
 							<span>Total Author</span>
 						</div>
 					</div>
@@ -262,7 +262,7 @@ a:hover, a:focus {
 				<div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
 					<div class="block-18 bg-light">
 						<div class="text">
-							<strong class="number" data-number="12000">0</strong>
+							<strong class="number" data-number="{{ total_users[0] }}">0</strong>
 							<span>Happy Readers</span>
 						</div>
 					</div>
@@ -293,7 +293,7 @@ a:hover, a:focus {
 					<div class="card card-just-text" data-background="color" data-color="green" data-radius="none">
 						<div class="content">
 							<h6 class="category">service</h6>
-							<h4 class="title"><a href="#">Listen Podcasts</a></h4>
+							<h4 class="title"><a href="/podcast">Listen Podcasts</a></h4>
 							<p class="description">Listen Free and Premium Podcast </p>
 						</div>
 					</div> <!-- end card -->
@@ -305,7 +305,7 @@ a:hover, a:focus {
 					<div class="card card-just-text" data-background="color" data-color="brown" data-radius="none">
 						<div class="content">
 							<h6 class="category">service</h6>
-							<h4 class="title"><a href="#">Audiobook</a></h4>
+							<h4 class="title"><a href="/audiobook">Audiobook</a></h4>
 							<p class="description">Listen Free and premium audiobook </p>
 						</div>
 					</div> <!-- end card -->
@@ -372,14 +372,13 @@ a:hover, a:focus {
 								<div class="icon d-flex align-items-center justify-content-center"><span
 										class="fa fa-quote-left"></div>
 								<div class="text">
-									<p class="mb-4">Far far away, behind the word mountains, far from the countries
-										Vokalia and Consonantia, there live the blind texts.</p>
+									<p class="mb-4">StoryBook is best website i have ever seen!!!!</p>
 									<div class="d-flex align-items-center">
 										<div class="user-img" style="background-image: url( {{url_for("static",
-											filename="view/images/person_1.jpg" )}} )"></div>
+											filename="image/user/mark.jpg" )}} )"></div>
 										<div class="pl-3">
-											<p class="name">Roger Scott</p>
-											<span class="position">Marketing Manager</span>
+											<p class="name">Mark Zuckerberg</p>
+											<span class="position">Facebook CEO</span>
 										</div>
 									</div>
 								</div>
@@ -390,14 +389,13 @@ a:hover, a:focus {
 								<div class="icon d-flex align-items-center justify-content-center"><span
 										class="fa fa-quote-left"></div>
 								<div class="text">
-									<p class="mb-4">Far far away, behind the word mountains, far from the countries
-										Vokalia and Consonantia, there live the blind texts.</p>
+									<p class="mb-4">There is no place like storybook......</p>
 									<div class="d-flex align-items-center">
 										<div class="user-img" style="background-image: url( {{url_for("static",
-											filename="view/images/person_2.jpg" )}} )"></div>
+											filename="image/user/mask.jpg" )}} )"></div>
 										<div class="pl-3">
-											<p class="name">Roger Scott</p>
-											<span class="position">Marketing Manager</span>
+											<p class="name">Elon Mask</p>
+											<span class="position">Tesla CEO</span>
 										</div>
 									</div>
 								</div>
@@ -408,20 +406,19 @@ a:hover, a:focus {
 								<div class="icon d-flex align-items-center justify-content-center"><span
 										class="fa fa-quote-left"></div>
 								<div class="text">
-									<p class="mb-4">Far far away, behind the word mountains, far from the countries
-										Vokalia and Consonantia, there live the blind texts.</p>
+									<p class="mb-4">Storybook is the place where you can find everything</p>
 									<div class="d-flex align-items-center">
 										<div class="user-img" style="background-image: url({{url_for("static",
-											filename="view/images/person_3.jpg" )}} )"></div>
+											filename="image/user/bill.jpg" )}} )"></div>
 										<div class="pl-3">
-											<p class="name">Roger Scott</p>
-											<span class="position">Marketing Manager</span>
+											<p class="name">Bill gates.</p>
+											<span class="position">owner's of windows</span>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="item">
+						<!-- <div class="item">
 							<div class="testimony-wrap py-4">
 								<div class="icon d-flex align-items-center justify-content-center"><span
 										class="fa fa-quote-left"></div>
@@ -455,7 +452,7 @@ a:hover, a:focus {
 									</div>
 								</div>
 							</div>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</div>

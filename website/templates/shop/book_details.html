@@ -11,7 +11,7 @@
 
 {% set img="image/" + book.2 %}
 
-    <!-- <div class="bg-light py-3">
+<!-- <div class="bg-light py-3">
       <div class="container">
         <div class="row">
           <div class="col-md-12 mb-0"><a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Tank Top T-Shirt</strong></div>
@@ -19,17 +19,22 @@
       </div>
     </div>   -->
 
-    <div class="site-section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <img src={{url_for("static", filename=img)}} alt="Image" class="img-fluid">
-          </div>
-          <div class="col-md-6">
-            <h2 class="text-black">{{ book.1 }}</h2>
-            <p>{{ book.3 }}</p>
-            <p><strong class="text-primary h4">{{ book.4 }}Tk</strong></p>
-            <!-- <div class="mb-1 d-flex">
+<div class="site-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <img src={{url_for("static", filename=img)}} alt="Image" class="img-fluid">
+      </div>
+      <div class="col-md-6">
+        <input type="text" name="" value="{{count}}" id="item">
+        <input type="hidden" id="id-{{count}}" value="{{book.0}}">
+            <input type="hidden" id="productName-{{ count}}" value="{{book.1}}">
+            <input type="hidden" id="price-{{ count}}" value="{{book.4}}">
+            <input type="hidden" id="productImage-{{ count}}" value="{{book.2}}">
+        <h2 class="text-black">{{ book.1 }}</h2>
+        <p>{{ book.3 }}</p>
+        <p><strong class="text-primary h4">{{ book.4 }}Tk</strong></p>
+        <!-- <div class="mb-1 d-flex">
               <label for="option-sm" class="d-flex mr-3 mb-3">
                 <span class="d-inline-block mr-2" style="top:-2px; position: relative;"><input type="radio" id="option-sm" name="shop-sizes"></span> <span class="d-inline-block text-black">Small</span>
               </label>
@@ -43,26 +48,28 @@
                 <span class="d-inline-block mr-2" style="top:-2px; position: relative;"><input type="radio" id="option-xl" name="shop-sizes"></span> <span class="d-inline-block text-black"> Extra Large</span>
               </label>
             </div> -->
-            <div class="mb-5">
-              <div class="input-group mb-3" style="max-width: 120px;">
-              <div class="input-group-prepend">
-                <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
-              </div>
-              <input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-              <div class="input-group-append">
-                <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
-              </div>
+        <div class="mb-5">
+          <!-- <div class="input-group mb-3" style="max-width: 120px;">
+            <div class="input-group-prepend">
+              <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
             </div>
-
+            <input type="text" class="form-control text-center" value="1" placeholder=""
+              aria-label="Example text with button addon" aria-describedby="button-addon1">
+            <div class="input-group-append">
+              <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
             </div>
-            <p><a href="cart.html" class="buy-now btn btn-sm btn-primary">Add To Cart</a></p>
+          </div> -->
 
-          </div>
         </div>
+        <p><a class="buy-now btn btn-sm btn-primary add-cart" id="add-cart">Add To Cart</a></p>
+        <p><a href="cart.html" class="buy-now btn btn-sm btn-info">Rent book</a></p>
+
       </div>
     </div>
+  </div>
+</div>
 
-    <div class="site-section block-3 site-blocks-2 bg-light">
+<!-- <div class="site-section block-3 site-blocks-2 bg-light">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-md-7 site-section-heading text-center pt-4">
@@ -136,6 +143,167 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
-    {% endblock %}
+<script>
+
+let data = [];
+
+
+
+function Order(id, name, price, quantity, image) {
+  this.id = id;
+  this.name = name;
+  this.price = price;
+  this.quantity = quantity;
+  this.image = image;
+  this.total = this.price;
+}
+
+
+function getValue(index) {
+    let idValue=parseInt(document.getElementById("item").value);
+    const list = [];
+    const id = document.getElementById(`id-${idValue}`).value;
+    const productName = document.getElementById(`productName-${idValue}`).value;
+    const price = document.getElementById(`price-${idValue}`).value;
+    console.log(price);
+    const productImage = document.getElementById(`productImage-${idValue}`).value;
+
+    console.log(document.getElementById(`price-${idValue}`).value);
+
+
+    list.push(id, productName, parseInt(price), productImage);
+    return list;
+
+  }
+
+
+
+function save(obj) {
+
+  // console.log("keno tumi run hocco na")
+  for (let i = 0; i < data.length; i++) {
+    if (data[i].id === obj.id) {
+      data[i].quantity = data[i].quantity + 1;
+      data[i] = data[i];
+      data[i].total=data[i].price*data[i].quantity;
+      return;
+    }
+  };
+
+  data.push(obj);
+};
+
+function orderProduct(index) {
+
+  // const properties=getValue(index);
+  // const obj=new Order(index,properties[1],properties[2],1,properties[3]);
+  // obj.totalCost();
+  // save(obj);
+  // localStorage.setItem('product',JSON.stringify(data));
+
+  const cartData = JSON.parse(localStorage.getItem('product'));
+  // let catchCount=parseInt(localStorage.getItem('count'));
+
+  if (cartData) {
+    data=cartData;
+    const properties = getValue();
+    const obj = new Order(index, properties[1], properties[2], 1, properties[3]);
+    // obj.totalCost();
+    save(obj);
+    localStorage.setItem('product', JSON.stringify(data));
+
+  } else {
+    
+    const properties = getValue(index);
+    const obj = new Order(index, properties[1], properties[2], 1, properties[3]);
+    // obj.totalCost();
+    save(obj);
+    localStorage.setItem('product', JSON.stringify(data));
+
+  }
+
+
+}
+
+
+function costCalculation(){
+
+}
+
+
+function countOrder() {
+  const cartCounter = document.getElementById("cartCounter");
+  let catchCount = parseInt(localStorage.getItem('count'));
+
+  if (catchCount) {
+    catchCount++;
+    localStorage.setItem('count', catchCount);
+    cartCounter.textContent = catchCount;
+
+  } else {
+    localStorage.setItem('count', 1);
+    cartCounter.textContent = 1;
+  }
+
+
+}
+
+function nextPreOrder(index) {
+  countOrder();
+  orderProduct(index);
+
+}
+
+
+function addCart() {
+  // console.log("hello2");
+  // console.log(document.getElementById("item").value);
+  let idValue=parseInt(document.getElementById("item").value);
+  
+  let addCart=document.querySelector('.add-cart');
+  console.log("hello2");
+  addCart.addEventListener('click',()=>{
+    nextPreOrder(idValue);
+  })
+
+
+  // cart.forEach((item, index) => {
+  //   item.addEventListener('click', () => {
+  //     let idValue=parseInt(document.getElementById("item").value);
+  //     nextPreOrder(idValue);
+
+  //   })
+  // })
+}
+
+
+function restore() {
+  let restoreLocalValue = parseInt(localStorage.getItem('count'));
+  const cartCounter = document.getElementById("cartCounter");
+  if (restoreLocalValue) {
+    cartCounter.textContent = restoreLocalValue;
+  }
+
+}
+
+
+
+
+function manageOrder() {
+  // const cart = document.querySelectorAll("#add-cart");
+  console.log("hello");
+  restore();
+  addCart();
+
+}
+
+
+window.addEventListener("load", () => {
+  manageOrder();
+});
+
+</script>
+
+{% endblock %}

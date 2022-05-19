@@ -1,0 +1,347 @@
+{% extends "shop/base.html" %}
+{% block title %}cart{% endblock%}
+{% block head %}
+{{super()}}
+<style>
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="bg-light py-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 mb-0"><a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> <strong
+          class="text-black">Cart</strong></div>
+    </div>
+  </div>
+</div>
+
+<div class="site-section">
+  <div class="container">
+    <div class="row mb-5">
+      <form class="col-md-12" method="post">
+        <div class="site-blocks-table">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="product-thumbnail">Image</th>
+                <th class="product-name">Product</th>
+                <th class="product-price">Price</th>
+                <th class="product-quantity">Quantity</th>
+                <th class="product-total">Total</th>
+                <th class="product-remove">Remove</th>
+              </tr>
+            </thead>
+
+            <tbody id="cartTable">
+              
+            </tbody>
+          </table>
+        </div>
+      </form>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row mb-5">
+          <div class="col-md-6 mb-3 mb-md-0">
+            <button class="btn btn-primary btn-sm btn-block">Update Cart</button>
+          </div>
+          <div class="col-md-6">
+            <button class="btn btn-outline-primary btn-sm btn-block">Continue Shopping</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <label class="text-black h4" for="coupon">Coupon</label>
+            <p>Enter your coupon code if you have one.</p>
+          </div>
+          <div class="col-md-8 mb-3 mb-md-0">
+            <input type="text" class="form-control py-3" id="coupon" placeholder="Coupon Code">
+          </div>
+          <div class="col-md-4">
+            <button class="btn btn-primary btn-sm" onclick="discountCode()">Apply Coupon</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 pl-5">
+        <div class="row justify-content-end">
+          <div class="col-md-7">
+            <div class="row">
+              <div class="col-md-12 text-right border-bottom mb-5">
+                <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <span class="text-black">Subtotal</span>
+              </div>
+              <div class="col-md-6 text-right">
+                <strong class="text-black"><span id="subTotal">0</span>Tk</strong>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <span class="text-black">Shipping charge</span>
+              </div>
+              <div class="col-md-6 text-right">
+                <strong class="text-black"><span id="shipping">50</span>Tk</strong>
+              </div>
+            </div>
+            <div class="row mb-5">
+              <div class="col-md-6">
+                <span class="text-black">Total</span>
+              </div>
+              <div class="col-md-6 text-right">
+                <strong class="text-black"><span id="totalPrice">0</span>Tk</strong>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <a href="/checkout"><button class="btn btn-primary btn-lg py-3 btn-block"
+                    onclick="window.location='checkout.html'">Proceed To Checkout</button></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+
+let value=JSON.parse(localStorage.getItem('product'));
+let count=localStorage.getItem('count');
+let subTotal=0;
+
+
+function restore(){
+    let restoreLocalValue = parseInt(localStorage.getItem('count'));
+    const cartCounter=document.getElementById("cartCounter");
+    if(restoreLocalValue){
+        cartCounter.textContent=restoreLocalValue;
+        subTotalPlus();
+    }
+    
+
+}
+
+function updateHtml(){
+  const empty=[];
+  const productList=JSON.parse(localStorage.getItem('product'));
+  console.log(productList);
+  const cartTable=document.getElementById('cartTable');
+  if(productList.length===0){
+    cartTable.innerHTML="No Product In cart";
+  }else{
+
+  for(let i=0;i<productList.length;i++){
+    const html=tableRow(productList[i].image,productList[i].name,productList[i].price,productList[i].quantity,productList[i].total);
+    empty.push(html);
+    cartTable.innerHTML=empty.join('' );
+
+    
+}
+}
+  const cartCounter=document.querySelector("#cartCounter");
+  const plus=document.querySelectorAll("#plus");
+  const minus=document.querySelectorAll("#minus");
+  const quantityInput=document.querySelectorAll('#textbox');
+  const priceTotal=document.querySelectorAll("#priceTotal")
+  const removeButton=document.querySelectorAll("#removeButton");
+  
+  // console.log(subTotal.innerHTML);
+    // console.log(quantityInput);
+  // console.log(plus[2]);
+  plus.forEach((item,index)=>{
+    item.addEventListener('click',()=>{
+      if(quantityInput[index].value>=5){
+        alert("you stupid! etto gula boi kina ki korbi...");
+        quantityInput[index].value=5;
+        value[index].quantity=5;
+        value[index].total=value[index].price*value[index].quantity;
+        priceTotal[index].innerHTML=value[index].total;
+        localStorage.setItem('product',JSON.stringify(value));
+      }else{
+
+        quantityInput[index].value++;
+        value[index].quantity=parseInt(value[index].quantity)+1;
+        value[index].total=value[index].price*value[index].quantity;
+        priceTotal[index].innerHTML=value[index].total;
+        count++;
+        cartCounter.textContent=count;
+        localStorage.setItem('product',JSON.stringify(value));
+        localStorage.setItem('count',count);
+        subTotalPlus();
+      }
+     
+    })
+
+  })
+
+
+  minus.forEach((item,index)=>{
+    item.addEventListener('click',()=>{
+      if(quantityInput[index].value<=0){
+        quantityInput[index].value=0;
+        value[index].quantity=0;
+        value[index].total=value[index].price*value[index].quantity;
+        priceTotal[index].innerHTML=value[index].total;
+        localStorage.setItem('product',JSON.stringify(value));
+      }else{
+        quantityInput[index].value--;
+        value[index].quantity=parseInt(value[index].quantity)-1;
+        value[index].total=value[index].price*value[index].quantity;
+        priceTotal[index].innerHTML=value[index].total;
+        count--;
+        cartCounter.textContent=count;
+        localStorage.setItem('product',JSON.stringify(value));
+        localStorage.setItem('count',count);
+        subTotalPlus();
+      }
+      
+      // const quantityValue=quantityInput[index];
+    })
+
+  })
+
+  removeButton.forEach((item,index)=>{
+    item.addEventListener('click',()=>{
+      let quantity=parseInt(value[index].quantity);
+      value.splice(index,1);
+      count=count-quantity;
+      cartCounter.textContent=count;
+      localStorage.setItem('count',count);
+      localStorage.setItem('product',JSON.stringify(value));
+      subTotalPlus();
+      updateHtml();
+    })
+
+
+  })
+
+  }
+
+
+  function subTotalPlus(){
+    const subTotal=document.querySelector("#subTotal");
+    const totalPrice=document.querySelector("#totalPrice");
+    let productTotal=JSON.parse(localStorage.getItem('product'));
+    let sum=0;
+    for(let i=0;i<productTotal.length;i++){
+      sum = sum + parseInt(productTotal[i].total);
+      // console.log(sum);
+
+    }
+    localStorage.setItem('subTotal',sum);
+    let catchTotal=localStorage.getItem('subTotal');
+    subTotal.innerHTML=catchTotal;
+    if(catchTotal===0){
+      totalPrice.innerHTML=0;
+    }else{
+      totalPrice.innerHTML=parseInt(catchTotal)+50;
+    }
+  }
+
+
+
+
+function tableRow(image,name,price,quantity,total){
+  return `<tr>
+                <td class="product-thumbnail">
+                  <img src="static/image/${image}" alt="Image" class="img-fluid">
+                </td>
+                <td class="product-name">
+                  <h2 class="h5 text-black">${name}</h2>
+                </td>
+                <td>${price}</td>
+                <td>
+                  <div class="input-group mb-3" style="max-width: 120px;">
+                    <div class="input-group-prepend">
+                      <button class="btn btn-outline-primary" id="minus" type="button">&minus;</button>
+                    </div>
+                    <input type="text" class="form-control text-center" value="${quantity}" id="textbox" placeholder=""
+                      aria-label="Example text with button addon" aria-describedby="button-addon1">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-primary" id="plus" type="button">&plus;</button>
+                    </div>
+                  </div>
+
+                </td>
+                <td id="priceTotal">${total}</td>
+                <td><a href="#" class="btn btn-primary btn-sm" id="removeButton" >X</a></td>
+              </tr>`;
+}
+
+
+
+window.addEventListener("load",()=>{
+    updateHtml();
+    restore();
+    
+});
+
+  // var subTotal=document.getElementById("subTotal");
+  // var shipping = document.getElementById("shipping");
+  // var total = document.getElementById("total");
+  // var coupon = document.getElementById("coupon");
+
+  // function decreaseNumber(i,p) {
+  //   var itemVal = document.getElementById(i);
+  //   var price = document.getElementById(p);
+
+  //   // console.log(itemVal)
+  //   if(itemVal.value<=0){
+  //     itemVal.value=0;
+  //     alert("negitive not allowed")
+  //   }
+  //   else{
+  //     itemVal.value=parseInt(itemVal.value)-1;
+  //     price.innerHTML=parseInt(price.innerHTML)-15;
+  //     subTotal.innerHTML=parseInt(subTotal.innerHTML)-15;
+  //     total.innerHTML=parseInt(subTotal.innerHTML)+parseInt(shipping.innerHTML);
+  //   }
+    
+  // }
+
+  // function increaseNumber(i,p) {
+  //   var itemVal = document.getElementById(i,p);
+  //   var price = document.getElementById(p);
+  //   // console.log(itemVal)
+  //   if(itemVal.value>=5){
+  //     itemVal.value=5;
+  //     alert("Maxium 5 product allowed");
+  //   }
+  //   else{
+  //     itemVal.value=parseInt(itemVal.value)+1;
+  //     price.innerHTML=parseInt(price.innerHTML)+15;
+  //     subTotal.innerHTML=parseInt(subTotal.innerHTML)+15;
+  //     total.innerHTML=parseInt(subTotal.innerHTML)+parseInt(shipping.innerHTML);
+  //   }
+    
+  // }
+
+
+  // function discountCode(){
+
+  //   if(coupon.value=="mizan"){
+  //     total.innerHTML=parseInt(total.innerHTML)-30;
+  //     alert("you get 30 taka discount!!")
+  //   }
+    
+  // }
+
+
+
+
+</script>
+
+
+
+
+{% endblock %}

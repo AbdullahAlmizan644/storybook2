@@ -93,6 +93,8 @@
                                 <th class="d-none d-xl-table-cell">Audio name</th>
                                 <th class="d-none d-xl-table-cell">podcaster</th>
                                 <th class="d-none d-xl-table-cell">Date</th>
+                                <th class="d-none d-xl-table-cell">edit</th>
+                                <th class="d-none d-xl-table-cell">Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -106,6 +108,7 @@
                                 <td class="d-none d-xl-table-cell">{{ pod.4}}</td>
                                 <td class="d-none d-xl-table-cell">{{ pod.5}}</td>
                                 <td class="d-none d-xl-table-cell">{{ pod.6}}</td>
+                                <td><a href="/edit_podcast/{{pod.0}}" class="btn btn-success">edit</a></td>
                                 <td><a href="/delete_podcast/{{pod.0}}" class="btn btn-danger">Delete</a></td>
 
                             </tr>

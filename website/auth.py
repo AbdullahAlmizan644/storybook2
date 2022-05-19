@@ -1,12 +1,94 @@
+import email
+from glob import glob
 from flask import Blueprint, render_template,request,flash,redirect,session
 from .__init__ import db,create_app
 import os
 from werkzeug.utils import secure_filename
 from datetime import datetime 
+from flask_mail import Mail,Message
+from random import randint
 
 auth=Blueprint('auth',__name__)
-
+mail=Mail()
 app=create_app()
+
+otp=randint(0000,9999)
+
+
+@auth.route("/signup", methods=["GET","POST"])
+def signup():
+    if request.method=="POST":
+        username=request.form.get("username")
+        email=request.form.get("email")
+        password1=request.form.get("password1")
+        password2=request.form.get("password2")
+
+        cur=db.connection.cursor()
+        cur.execute("SELECT * FROM users where username=%s",(username,))
+        user=cur.fetchone()
+
+
+        if user:
+            flash("username already exits.Try Another one.",category="error")
+
+        elif len(username)<5:
+            flash("username must be greater than 4 words",category="error")
+
+        elif len(email)<5:
+            flash("email must be greater than 4 words",category="error")
+
+        elif len(password1)<8:
+            flash("password must be greater than 8 digit",category="error")
+
+        elif password1!=password2:
+            flash("password doesn't match",category="error")
+
+        else:
+            
+            global dict
+
+            dict={
+                "name":username,
+                "email":email,
+                "password":password1,
+            }
+
+            msg = Message("otp",sender="dekbovideo@gmail.com",recipients=[email])
+            msg.body = str(otp)  
+            mail.send(msg)
+
+
+            flash("Send otp in your mail",category="success")
+            return redirect("/verify_otp")
+    return render_template("auth/signup.html")
+
+
+
+@auth.route("/verify_otp",methods=["GET","POST"])
+def verify_otp():
+    global dict
+    if request.method=="POST":
+        verify_otp=request.form.get("otp")
+
+        print(verify_otp)
+        print(otp)
+        if int(verify_otp)==otp:
+                    
+            cur=db.connection.cursor()
+            cur.execute("INSERT INTO users(username,email,password,date) VALUES(%s,%s,%s,%s)",(dict["name"],dict["email"],dict["password"],datetime.now(),))
+            db.connection.commit()
+            cur.close()
+            flash("Otp matched & account create successfully",category="success")
+            return redirect("/login")
+        
+        else:
+            flash("Otp doesn't matched",category="error")
+            return redirect(request.url)
+
+    return render_template("auth/verify_otp.html")
+
+
+
 
 @auth.route("/login", methods=["GET","POST"])
 def login():
@@ -27,36 +109,6 @@ def login():
 
     return render_template('auth/login.html')
 
-
-@auth.route("/signup", methods=["GET","POST"])
-def signup():
-    if request.method=="POST":
-        username=request.form.get("username")
-        email=request.form.get("email")
-        password1=request.form.get("password1")
-        password2=request.form.get("password2")
-
-
-        if len(username)<5:
-            flash("username must be greater than 4 words",category="error")
-
-        elif len(email)<5:
-            flash("email must be greater than 4 words",category="error")
-
-        elif len(password1)<8:
-            flash("password must be greater than 8 digit",category="error")
-
-        elif password1!=password2:
-            flash("password doesn't match",category="error")
-
-        else:
-            cur=db.connection.cursor()
-            cur.execute("INSERT INTO users(username,email,password,date) VALUES(%s,%s,%s,%s)",(username,email,password1,datetime.now()))
-            db.connection.commit()
-            cur.close()
-            flash("Account created successfully!",category="success")
-            return redirect("/login")
-    return render_template("auth/signup.html")
 
 
 

@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template,request,flash
+from flask import Blueprint, render_template,request,flash,redirect,session
 from website.__init__ import db
 
 audiobook=Blueprint('audiobook',__name__)
@@ -17,16 +17,31 @@ def audiobooks():
 
 @audiobook.route("/single_audiobook/<int:sno>")
 def single_audiobook(sno):
-    cur=db.connection.cursor()
-    cur.execute("SELECT * FROM audiobooks")
-    audiobooks=cur.fetchall()
+    if "user" in session:
+        cur=db.connection.cursor()
+        cur.execute("SELECT * FROM users where username=%s",(session["user"],))
+        user=cur.fetchone()
+        
+        cur=db.connection.cursor()
+        cur.execute("SELECT * FROM audiobooks where id=%s",(sno,))
+        audiobook=cur.fetchone()
 
+        cur=db.connection.cursor()
+        cur.execute("SELECT * FROM audiobooks")
+        audiobooks=cur.fetchall()
 
-    cur=db.connection.cursor()
-    cur.execute("SELECT * FROM audiobooks where id=%s",(sno,))
-    audiobook=cur.fetchone()
-    return render_template("audiobook/single-post.html",audiobook=audiobook,audiobooks=audiobooks)
+        if "free" in audiobook[8]:
+            
+            return render_template("audiobook/single-post.html",audiobook=audiobook,audiobooks=audiobooks)
 
+        elif "premium" in user[8] and "premium" in audiobook[8]:
+            return render_template("audiobook/single-post.html",audiobook=audiobook,audiobooks=audiobooks)
+        
+        else:
+            return redirect("/pricing")
+    
+    else:
+        return redirect("/login")
 
 @audiobook.route("/search_audiobook",methods=["GET","POST"])
 def search_audiobook():

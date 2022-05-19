@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block content %}
-    <!-- <div class="bg-light py-3">
+<!-- <div class="bg-light py-3">
       <div class="container">
         <div class="row">
           <div class="col-md-12 mb-0"><a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> <strong
@@ -17,13 +17,13 @@
       </div>
     </div> -->
 
-    <div class="site-section">
-      <div class="container">
+<div class="site-section">
+  <div class="container">
 
-        <div class="row mb-5">
-          <div class="col-md-9 order-2">
+    <div class="row mb-5">
+      <div class="col-md-9 order-2">
 
-            <!-- <div class="row">
+        <!-- <div class="row">
               <div class="col-md-12 mb-5">
                 <div class="float-md-left mb-4">
                   <h2 class="text-black h5">Book Shop</h2>
@@ -55,26 +55,34 @@
                 </div>
               </div>
             </div> -->
-            <div class="row mb-5">
-
-              {% for book in books %}
-              {% set img ="image/" + book.2 %}
-              <div class="col-sm-6 col-lg-4 mb-4" data-aos="">
-                <div class="block-4 text-center border">
-                  <figure class="block-4-image">
-                    <a href="/book_details/{{ book.0 }}"><img src={{url_for("static", filename=img  )}}
-                        alt="Image placeholder" class="img-fluid"></a>
-                  </figure>
-                  <div class="block-4-text p-4">
-                    <h3><a href="/book_details/{{ book.0 }}">{{ book.1 }}</a></h3>
-                    <p class="mb-0">{{ book.3[0:50] }}</p>
-                    <p class="text-primary font-weight-bold">{{book.4}}Tk</p>
-                  </div>
-                </div>
+        <div class="row mb-5">
+          {% set count = namespace(value=0) %}
+          {% for book in books %}
+          {% set img ="image/" + book.2 %}
+          <span class="box">
+            <input type="hidden" id="id-{{ count.value }}" value="{{book.0}}">
+            <input type="hidden" id="productName-{{ count.value }}" value="{{book.1}}">
+            <input type="hidden" id="price-{{ count.value }}" value="{{book.4}}">
+            <input type="hidden" id="productImage-{{ count.value }}" value="{{book.2}}">
+          </span>
+          <div class="col-sm-6 col-lg-4 mb-4" data-aos="">
+            <div class="block-4 text-center border">
+              <figure class="block-4-image">
+                <a href="/book_details/{{ book.0 }}/{{count.value}}"><img style="height: 250px;" src={{url_for("static", filename=img
+                    )}} alt="Image placeholder" class="img-fluid"></a>
+              </figure>
+              <div class="block-4-text p-4">
+                <h3><a href="/book_details/{{ book.0 }}/{{count.value}}">{{ book.1 }}</a></h3>
+                <p class="mb-0">{{ book.3[0:100] }}....</p>
+                <p class="text-primary font-weight-bold">{{book.4}}Tk</p>
+                <p><a class="buy-now btn btn-sm btn-primary add-cart">Add To Cart</a></p>
               </div>
-              {% endfor %}
+            </div>
+          </div>
+          {% set count.value = count.value + 1 %}
+          {% endfor %}
 
-              <!-- <div class="col-sm-6 col-lg-4 mb-4" data-aos="">
+          <!-- <div class="col-sm-6 col-lg-4 mb-4" data-aos="">
                 <div class="block-4 text-center border">
                   <figure class="block-4-image">
                     <a href="shop-single.html"><img src={{url_for("static", filename="shop/images/cloth_1.jpg" )}}
@@ -142,32 +150,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
-                <div class="block-4 text-center border">
-                  <figure class="block-4-image">
-                    <a href="shop-single.html"><img src="images/shoe_1.jpg" alt="Image placeholder"
-                        class="img-fluid"></a>
-                  </figure>
-                  <div class="block-4-text p-4">
-                    <h3><a href="shop-single.html">Corater</a></h3>
-                    <p class="mb-0">Finding perfect products</p>
-                    <p class="text-primary font-weight-bold">$50</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
-                <div class="block-4 text-center border">
-                  <figure class="block-4-image">
-                    <a href="shop-single.html"><img src="images/cloth_2.jpg" alt="Image placeholder"
-                        class="img-fluid"></a>
-                  </figure>
-                  <div class="block-4-text p-4">
-                    <h3><a href="shop-single.html">Polo Shirt</a></h3>
-                    <p class="mb-0">Finding perfect products</p>
-                    <p class="text-primary font-weight-bold">$50</p>
-                  </div>
-                </div>
-              </div>
+
 
               <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
                 <div class="block-4 text-center border">
@@ -223,38 +206,76 @@
                 </div>
               </div> -->
 
-            </div>
-            <div class="row" data-aos="">
-              <div class="col-md-12 text-center">
-                <div class="site-block-27">
-                  <ul>
-                    <li><a href="#">&lt;</a></li>
-                    <li class="active"><span>1</span></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">&gt;</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-3 order-1 mb-5 mb-md-0">
-            <div class="border p-4 rounded mb-4">
-              <h3 class="mb-3 h6 text-uppercase text-black d-block">Categories</h3>
-              <ul class="list-unstyled mb-0">
-                <li class="mb-1"><a href="#" class="d-flex"><span>Thriller</span> <span
-                      class="text-black ml-auto">(2,220)</span></a></li>
-                <li class="mb-1"><a href="#" class="d-flex"><span>Mystry</span> <span
-                      class="text-black ml-auto">(2,550)</span></a></li>
-                <li class="mb-1"><a href="#" class="d-flex"><span>Detective</span> <span
-                      class="text-black ml-auto">(2,124)</span></a></li>
+        </div>
+        <div class="row" data-aos="">
+          <div class="col-md-12 text-center">
+            <div class="site-block-27">
+              <ul>
+                <li><a href="#">&lt;</a></li>
+                <li class="active"><span>1</span></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">&gt;</a></li>
               </ul>
             </div>
+          </div>
+        </div>
+      </div>
 
-            <!-- <div class="border p-4 rounded mb-4">
+      <div class="col-md-3 order-1 mb-5 mb-md-0">
+        <div class="border p-4 rounded mb-4">
+          <h3 class="mb-3 h6 text-uppercase text-black d-block">Categories</h3>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-1"><a href="#" class="d-flex"><span>Thriller</span>
+                <span class="text-black ml-auto"></span></a></li>
+
+            <li class="mb-1"><a href="#" class="d-flex"><span>Mystry</span>
+                <span class="text-black ml-auto"></span></a></li>
+
+            <li class="mb-1"><a href="#" class="d-flex"><span>Science</span>
+                <span class="text-black ml-auto"></span></a></li>
+
+            <li class="mb-1"><a href="#" class="d-flex"><span>Psychology</span>
+                <span class="text-black ml-auto"></span></a></li>
+
+            <li class="mb-1"><a href="#" class="d-flex"><span>Horror</span>
+                <span class="text-black ml-auto"></span></a></li>
+
+            <li class="mb-1"><a href="#" class="d-flex"><span>History</span>
+                <span class="text-black ml-auto"></span></a></li>
+
+            <li class="mb-1"><a href="#" class="d-flex"><span>Biography</span>
+                <span class="text-black ml-auto"></span></a></li>
+
+            <li class="mb-1"><a href="#" class="d-flex"><span>Crime</span>
+                <span class="text-black ml-auto"></span></a></li>
+
+            <li class="mb-1"><a href="#" class="d-flex"><span>Mystry</span>
+                <span class="text-black ml-auto"></span></a></li>
+
+            <li class="mb-1"><a href="#" class="d-flex"><span>Science</span>
+                <span class="text-black ml-auto"></span></a></li>
+
+            <li class="mb-1"><a href="#" class="d-flex"><span>Culture</span>
+                <span class="text-black ml-auto"></span></a></li>
+
+            <li class="mb-1"><a href="#" class="d-flex"><span>Health</span>
+                <span class="text-black ml-auto"></span></a></li>
+
+            <li class="mb-1"><a href="#" class="d-flex"><span>History</span>
+                <span class="text-black ml-auto"></span></a></li>
+
+            <li class="mb-1"><a href="#" class="d-flex"><span>Food</span>
+                <span class="text-black ml-auto"></span></a></li>
+
+            <li class="mb-1"><a href="#" class="d-flex"><span>Novels</span>
+                <span class="text-black ml-auto"></span></a></li>
+          </ul>
+        </div>
+
+        <!-- <div class="border p-4 rounded mb-4">
               <div class="mb-4">
                 <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter by Price</h3>
                 <div id="slider-range" class="border-primary"></div>
@@ -295,9 +316,9 @@
               </div>
 
             </div> -->
-          </div>
-        </div>
-<!-- 
+      </div>
+    </div>
+    <!-- 
         <div class="row">
           <div class="col-md-12">
             <div class="site-section site-blocks-2">
@@ -346,6 +367,155 @@
           </div>
         </div> -->
 
-      </div>
-    </div>
+  </div>
+</div>
+
+
+<script>
+
+
+  let data = [];
+
+
+
+  function Order(id, name, price, quantity, image) {
+    this.id = id;
+    this.name = name;
+    this.price = price;
+    this.quantity = quantity;
+    this.image = image;
+    this.total = this.price;
+  }
+
+  function getValue(index) {
+    const list = [];
+    const id = document.getElementById(`id-${index}`).value;
+    const productName = document.getElementById(`productName-${index}`).value;
+    const price = document.getElementById(`price-${index}`).value;
+    console.log(price);
+    const productImage = document.getElementById(`productImage-${index}`).value;
+
+    console.log(document.getElementById(`price-${index}`).value);
+
+
+    list.push(id, productName, parseInt(price), productImage);
+    return list;
+
+  }
+
+
+  function save(obj) {
+
+    // console.log("keno tumi run hocco na")
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].id === obj.id) {
+        data[i].quantity = data[i].quantity + 1;
+        data[i] = data[i];
+        data[i].total=data[i].price*data[i].quantity;
+        return;
+      }
+    };
+
+    data.push(obj);
+  };
+
+  function orderProduct(index) {
+
+    // const properties=getValue(index);
+    // const obj=new Order(index,properties[1],properties[2],1,properties[3]);
+    // obj.totalCost();
+    // save(obj);
+    // localStorage.setItem('product',JSON.stringify(data));
+
+    const cartData = JSON.parse(localStorage.getItem('product'));
+    // let catchCount=parseInt(localStorage.getItem('count'));
+
+    if (cartData) {
+      data=cartData;
+      const properties = getValue(index);
+      const obj = new Order(index, properties[1], properties[2], 1, properties[3]);
+      // obj.totalCost();
+      save(obj);
+      localStorage.setItem('product', JSON.stringify(data));
+
+    } else {
+      
+      const properties = getValue(index);
+      const obj = new Order(index, properties[1], properties[2], 1, properties[3]);
+      // obj.totalCost();
+      save(obj);
+      localStorage.setItem('product', JSON.stringify(data));
+
+    }
+
+
+  }
+
+
+  function costCalculation(){
+
+  }
+
+
+  function countOrder() {
+    const cartCounter = document.getElementById("cartCounter");
+    let catchCount = parseInt(localStorage.getItem('count'));
+
+    if (catchCount) {
+      catchCount++;
+      localStorage.setItem('count', catchCount);
+      cartCounter.textContent = catchCount;
+
+    } else {
+      localStorage.setItem('count', 1);
+      cartCounter.textContent = 1;
+    }
+
+
+  }
+
+  function nextPreOrder(index) {
+    countOrder();
+    orderProduct(index);
+
+  }
+
+  function addCart(cart) {
+    console.log(cart);
+    cart.forEach((item, index) => {
+      item.addEventListener('click', () => {
+        nextPreOrder(index);
+
+      })
+    })
+  }
+
+  function restore() {
+    let restoreLocalValue = parseInt(localStorage.getItem('count'));
+    const cartCounter = document.getElementById("cartCounter");
+    if (restoreLocalValue) {
+      cartCounter.textContent = restoreLocalValue;
+    }
+
+  }
+
+
+
+
+  function manageOrder() {
+    const cart = document.querySelectorAll(".add-cart");
+    restore();
+    addCart(cart);
+
+  }
+
+
+  window.addEventListener("load", () => {
+    manageOrder();
+  });
+
+</script>
+
+
+
 {% endblock %}

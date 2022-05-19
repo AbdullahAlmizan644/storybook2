@@ -78,6 +78,11 @@
                     </ul>
                   </li> -->
                   <li><a href="/">Home</a></li>
+                  {% if "user" in session %}
+                  <li><a href="/profile">{{ session["user"] }}</a></li>
+                  {% else %}
+                  <li><a href="/login">Login</a></li>
+                  {% endif %}
                   <li><a href="/shop">Shop</a></li>
                   <li><a href="/audiobook">AudioBook</a></li>
                   <li><a href="/podcast">Podcast</a></li>
@@ -117,18 +122,18 @@
                 </div>
                 <div class="col-md-6 col-lg-6">
                   <ul class="list-unstyled">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Matches</a></li>
-                    <li><a href="#">News</a></li>
-                    <li><a href="#">Team</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/shop">shop</a></li>
+                    <li><a href="/podcast">podcast</a></li>
+                    <li><a href="/audiobook">audiobook</a></li>
                   </ul>
                 </div>
                 <div class="col-md-6 col-lg-6">
                   <ul class="list-unstyled">
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">Membership</a></li>
+                    <li><a href="/about">About Us</a></li>
+                    <!-- <li><a href="#">Privacy Policy</a></li> -->
+                    <li><a href="/contat">Contact Us</a></li>
+                    <!-- <li><a href="#">Membership</a></li> -->
                   </ul>
                 </div>
               </div>
@@ -154,7 +159,7 @@
           <div class="row pt-5 mt-5 text-center">
             <div class="col-md-12">
               <p>
-              Copyright &copy; 2022 Abdullah Al Mizan
+              Copyright &copy; 2022 All Rights reserved | Abdullah Al Mizan
               </p>
             </div>
             

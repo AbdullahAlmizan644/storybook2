@@ -19,7 +19,7 @@ def admin_login():
         email=request.form.get("email")
         password=request.form.get("password")
 
-        if email=="admin@gmail.com" and password=="12345678":
+        if email=="abdullahalmizan644@gmail.com" and password=="12345678":
             session["admin"]=email
             flash("Login Successfully!", category="success")
             return redirect("/dashboard")
@@ -43,8 +43,6 @@ def admin_profile():
 
 
 
-
-
 @admin.route("/dashboard")
 def dashboard():
     if "admin" in session:
@@ -64,7 +62,7 @@ def dashboard():
 
 
         cur=db.connection.cursor()
-        cur.execute("SELECT count(id) from podcasts ")
+        cur.execute("SELECT count(id) from podcast ")
         total_podcasts=cur.fetchone()
 
         cur=db.connection.cursor()  
@@ -112,6 +110,7 @@ def delete_user(id):
         cur=db.connection.cursor()
         cur.execute("DELETE FROM users WHERE sno=%s",(id,))
         db.connection.commit()
+        flash("you remove a user",category="error")
         return redirect("/all_user")
     
     else:
@@ -144,6 +143,7 @@ def delete_audiobok (id):
         cur=db.connection.cursor()
         cur.execute("DELETE FROM audiobooks WHERE id=%s",(id,))
         db.connection.commit()
+        flash("Audiobook delete",category="error")
         return redirect("/all_audiobook")
     
     else:
@@ -160,6 +160,7 @@ def add_audiobok ():
             description=request.form.get("description")
             writer=request.form.get("writer")
             category=request.form.get("category")
+            Type=request.form.get("type")
 
             image = request.files['image']
             audio = request.files['audio']
@@ -170,10 +171,11 @@ def add_audiobok ():
                 image.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(image.filename)))
                 audio.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(audio.filename)))
                 cur=db.connection.cursor()
-                cur.execute("INSERT INTO audiobooks(name,description,writer,image,audio,date,category) VALUES (%s,%s,%s,%s,%s,%s,%s)",(name,description,writer,image.filename,audio.filename,datetime.now(),category,))
+                cur.execute("INSERT INTO audiobooks(name,description,writer,image,audio,date,category,Type) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)",(name,description,writer,image.filename,audio.filename,datetime.now(),category,Type,))
                 db.connection.commit()
+                flash("Audiobook added successfully!",category="success")
                 return redirect("/all_audiobook")
-
+        
         return render_template("admin/add_audiobook.html")
     
     else:
@@ -202,7 +204,7 @@ def edit_audiobook(id):
                 cur=db.connection.cursor()
                 cur.execute("update audiobooks set name=%s,description=%s,writer=%s,category=%s,image=%s,audio=%s where id=%s",(name,description,writer,category,image.filename,audio.filename,id,))
                 db.connection.commit()
-
+            flash("Audiobook edited successfully!",category="success")
             return redirect("/all_audiobook")
         return render_template("admin/edit_audiobook.html",audiobook=audiobook)
     else:
@@ -218,11 +220,11 @@ def edit_audiobook(id):
 def all_podcast():
     if "admin" in session:
         cur=db.connection.cursor()
-        cur.execute("SELECT * FROM podcasts")
+        cur.execute("SELECT * FROM podcast")
         podcasts=cur.fetchall()
 
         cur=db.connection.cursor()  
-        cur.execute("SELECT count(id) from podcasts ")
+        cur.execute("SELECT count(id) from podcast ")
         total_podcasts=cur.fetchone()
         return render_template("admin/podcast.html",podcasts=podcasts,total_podcasts=total_podcasts)
     else:
@@ -233,13 +235,41 @@ def all_podcast():
 def delete_podcast(id):
     if "admin" in session:
         cur=db.connection.cursor()
-        cur.execute("DELETE FROM podcasts WHERE id=%s",(id,))
+        cur.execute("DELETE FROM podcast WHERE id=%s",(id,))
         db.connection.commit()
+        flash("podcast deleted successfully!",category="error")
         return redirect("/all_podcast")
     
     else:
         return redirect("/admin_login")
 
+
+
+@admin.route("/edit_podcast/<int:id>",methods=["POST","GET"])
+def edit_podcast(id):
+    if "admin" in session:
+        cur=db.connection.cursor()
+        cur.execute("SELECT * FROM podcast WHERE id=%s",(id,))
+        podcast=cur.fetchone()
+        if request.method=="POST":
+            name=request.form.get("name")
+            description=request.form.get("description")
+            podcaster=request.form.get("podcaster")
+
+            image = request.files['image']
+            audio = request.files['audio']
+            if image.filename == '' and audio.filename == "":
+                flash('No selected file', category="error")
+                return redirect(request.url)
+            else:
+                cur=db.connection.cursor()
+                cur.execute("update podcast set name=%s,description=%s,podcaster=%s,image=%s,audio=%s where id=%s",(name,description,podcaster,image.filename,audio.filename,id,))
+                db.connection.commit()
+            flash("podcast edited successfully!",category="success")
+            return redirect("/all_podcast")
+        return render_template("admin/edit_podcast.html",podcast=podcast)
+    else:   
+        return redirect("/admin_login")
 
 
 
@@ -260,7 +290,7 @@ def add_podcast():
                 image.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(image.filename)))
                 audio.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(audio.filename)))
                 cur=db.connection.cursor()
-                cur.execute("INSERT INTO podcasts(name,description,podcaster,image,audio,date) VALUES (%s,%s,%s,%s,%s,%s)",(name,description,podcaster,image.filename,audio.filename,datetime.now()))
+                cur.execute("INSERT INTO podcast(name,description,podcaster,image,audio,date) VALUES (%s,%s,%s,%s,%s,%s)",(name,description,podcaster,image.filename,audio.filename,datetime.now()))
                 db.connection.commit()
                 return redirect("/all_podcast")
         return render_template("admin/add_podcast.html")
@@ -313,6 +343,8 @@ def add_book():
             name=request.form.get("name")
             description=request.form.get("description")
             price=request.form.get("price")
+            category=request.form.get("category")
+
 
             image = request.files['image']
             if image.filename == '':
@@ -321,7 +353,7 @@ def add_book():
             else:
                 image.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(image.filename)))
                 cur=db.connection.cursor()
-                cur.execute("INSERT INTO books(name,description,price,image,date) VALUES (%s,%s,%s,%s,%s)",(name,description,price,image.filename,datetime.now()))
+                cur.execute("INSERT INTO books(name,description,price,image,date,category) VALUES (%s,%s,%s,%s,%s,%s)",(name,description,price,image.filename,datetime.now(),category,))
                 db.connection.commit()
                 return redirect("/all_book")
         return render_template("admin/add_book.html")
