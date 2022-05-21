@@ -155,10 +155,10 @@
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
                                 aria-controls="home" aria-selected="true">About</a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
                                 aria-controls="profile" aria-selected="false">Timeline</a>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
             </div>
@@ -174,7 +174,8 @@
                     <p>social media link</p>
                     <a href="">Facebook Link</a><br />
                     <a href="">Twitter link</a><br />
-                    <a href="">instragram link</a>
+                    <a href="">instragram link</a><br><br>
+                    <a href="/user_logout" class="btn btn-danger">Logout</button></a>
                     <!-- <p>SKILLS</p>
                     <a href="">Web Designer</a><br />
                     <a href="">Web Developer</a><br />
@@ -222,12 +223,20 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6">
+                                <label>Dashboard</label>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="/user_dashboard" class="btn btn-warning">Dashboard</button></a>
+                            </div>
+                        </div>
+                        <!-- <div class="row">
+                            <div class="col-md-6">
                                 <label>Logout</label>
                             </div>
                             <div class="col-md-6">
                                 <a href="/user_logout" class="btn btn-danger">Logout</button></a>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="row">
@@ -249,6 +258,22 @@
                             </div>
                             <div class="col-md-6">
                                 <p>0</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Write story</label>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="/write_post"><button class="btn btn-primary">Write</button></a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>All story</label>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="/user_all_post"><button class="btn btn-primary">See all</button></a>
                             </div>
                         </div>
                         <div class="row">

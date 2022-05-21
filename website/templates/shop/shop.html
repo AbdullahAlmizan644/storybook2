@@ -68,14 +68,14 @@
           <div class="col-sm-6 col-lg-4 mb-4" data-aos="">
             <div class="block-4 text-center border">
               <figure class="block-4-image">
-                <a href="/book_details/{{ book.0 }}/{{count.value}}"><img style="height: 250px;" src={{url_for("static", filename=img
-                    )}} alt="Image placeholder" class="img-fluid"></a>
+                <a href="/book_details/{{ book.0 }}/{{count.value}}"><img style="height: 250px;" src={{url_for("static",
+                    filename=img )}} alt="Image placeholder" class="img-fluid"></a>
               </figure>
               <div class="block-4-text p-4">
                 <h3><a href="/book_details/{{ book.0 }}/{{count.value}}">{{ book.1 }}</a></h3>
                 <p class="mb-0">{{ book.3[0:100] }}....</p>
                 <p class="text-primary font-weight-bold">{{book.4}}Tk</p>
-                <p><a class="buy-now btn btn-sm btn-primary add-cart">Add To Cart</a></p>
+                <p><a class="buy-now btn btn-sm btn-primary add-cart" style="color: white;">Add To Cart</a></p>
               </div>
             </div>
           </div>
@@ -228,22 +228,22 @@
         <div class="border p-4 rounded mb-4">
           <h3 class="mb-3 h6 text-uppercase text-black d-block">Categories</h3>
           <ul class="list-unstyled mb-0">
-            <li class="mb-1"><a href="#" class="d-flex"><span>Thriller</span>
+            <li class="mb-1"><a href="/book_category/থ্রিলার" class="d-flex"><span>Thriller</span>
                 <span class="text-black ml-auto"></span></a></li>
 
-            <li class="mb-1"><a href="#" class="d-flex"><span>Mystry</span>
+            <li class="mb-1"><a href="/book_category/রোমান্স" class="d-flex"><span>Romance</span>
                 <span class="text-black ml-auto"></span></a></li>
 
-            <li class="mb-1"><a href="#" class="d-flex"><span>Science</span>
+            <li class="mb-1"><a href="/book_category/সাইন্স" class="d-flex"><span>Science</span>
                 <span class="text-black ml-auto"></span></a></li>
 
-            <li class="mb-1"><a href="#" class="d-flex"><span>Psychology</span>
+            <li class="mb-1"><a href="/book_category/সাইকোলজি" class="d-flex"><span>Psychology</span>
                 <span class="text-black ml-auto"></span></a></li>
 
             <li class="mb-1"><a href="#" class="d-flex"><span>Horror</span>
                 <span class="text-black ml-auto"></span></a></li>
 
-            <li class="mb-1"><a href="#" class="d-flex"><span>History</span>
+            <li class="mb-1"><a href="/book_category/হিস্টোরি" class="d-flex"><span>History</span>
                 <span class="text-black ml-auto"></span></a></li>
 
             <li class="mb-1"><a href="#" class="d-flex"><span>Biography</span>
@@ -252,7 +252,7 @@
             <li class="mb-1"><a href="#" class="d-flex"><span>Crime</span>
                 <span class="text-black ml-auto"></span></a></li>
 
-            <li class="mb-1"><a href="#" class="d-flex"><span>Mystry</span>
+            <li class="mb-1"><a href="/book_category/মিস্ট্রি" class="d-flex"><span>Mystry</span>
                 <span class="text-black ml-auto"></span></a></li>
 
             <li class="mb-1"><a href="#" class="d-flex"><span>Science</span>
@@ -261,7 +261,7 @@
             <li class="mb-1"><a href="#" class="d-flex"><span>Culture</span>
                 <span class="text-black ml-auto"></span></a></li>
 
-            <li class="mb-1"><a href="#" class="d-flex"><span>Health</span>
+            <li class="mb-1"><a href="/book_category/এডবেঞ্চার" class="d-flex"><span>Adventure</span>
                 <span class="text-black ml-auto"></span></a></li>
 
             <li class="mb-1"><a href="#" class="d-flex"><span>History</span>
@@ -411,7 +411,7 @@
       if (data[i].id === obj.id) {
         data[i].quantity = data[i].quantity + 1;
         data[i] = data[i];
-        data[i].total=data[i].price*data[i].quantity;
+        data[i].total = data[i].price * data[i].quantity;
         return;
       }
     };
@@ -431,7 +431,7 @@
     // let catchCount=parseInt(localStorage.getItem('count'));
 
     if (cartData) {
-      data=cartData;
+      data = cartData;
       const properties = getValue(index);
       const obj = new Order(index, properties[1], properties[2], 1, properties[3]);
       // obj.totalCost();
@@ -439,7 +439,7 @@
       localStorage.setItem('product', JSON.stringify(data));
 
     } else {
-      
+
       const properties = getValue(index);
       const obj = new Order(index, properties[1], properties[2], 1, properties[3]);
       // obj.totalCost();
@@ -452,7 +452,7 @@
   }
 
 
-  function costCalculation(){
+  function costCalculation() {
 
   }
 

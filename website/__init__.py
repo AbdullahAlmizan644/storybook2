@@ -1,11 +1,15 @@
 from flask import Flask,Blueprint
 from flask_mysqldb import MySQL
 from flask_mail import Mail
+from flask_ckeditor import CKEditor
 
 
 
 db=MySQL()
 mail=Mail()
+ckeditor=CKEditor()
+
+
 
 def create_app():
     UPLOAD_FOLDER = '/home/zeus/storybook2/website/static/image'
@@ -27,6 +31,7 @@ def create_app():
 
     db.init_app(app)
     mail.init_app(app)
+    ckeditor.init_app(app)
 
 
     from .view import view
@@ -35,6 +40,9 @@ def create_app():
     from .auth import auth
     from .podcast import podcast
     from .audiobook import audiobook
+    from .blog import blog
+    from .book_share import book_share
+    from .user_dashboard import user_dashboard
 
 
     app.register_blueprint(view, url_prefix="/")
@@ -43,5 +51,8 @@ def create_app():
     app.register_blueprint(auth, url_prefix="/")
     app.register_blueprint(podcast, url_prefix="/")
     app.register_blueprint(audiobook, url_prefix="/")
+    app.register_blueprint(blog, url_prefix="/")
+    app.register_blueprint(book_share, url_prefix="/")
+    app.register_blueprint(user_dashboard, url_prefix="/")
 
     return app

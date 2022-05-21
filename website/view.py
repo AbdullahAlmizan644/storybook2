@@ -88,14 +88,6 @@ def confirm_package():
 
 
 
-@view.route("/blog")
-def blog():
-    return render_template("view/blog.html")
-
-
-
-
-
 @view.route("/about")
 def about():
     return render_template("view/about.html")

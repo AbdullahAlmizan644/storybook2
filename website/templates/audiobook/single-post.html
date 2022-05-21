@@ -38,7 +38,7 @@
 
 </div>
 
-<div class="site-section bg-light">
+<!-- <div class="site-section bg-light">
   <div class="container">
     <div class="row mb-5">
       <div class="col-md-12 text-center">
@@ -47,37 +47,28 @@
     </div>
     <div class="row">
 
-      {% for audio in audiobooks %}
-      {% if audio[7]==audiobook[7] %}
-      <div class="col-md-6">
-        <div class="d-block podcast-entry bg-white mb-5" data-aos="fade-up">
-          {% set i="image/" +audio.3 %}
-          <div class="image w-100" style="height: 300px; background-image: url(  {{url_for("static",
-          filename=i)}}  );"></div>
-          <div class="text w-100">
+    {% for audio in audiobooks %}
+    {% if audio[7]==audiobook[7] %}
+      <div class="col-lg-4 col-sm-6 mb-4">
+        <div class="card h-100">
+          {% set img="image/" + audiobook.3 %}
+          <a href="/single_audiobook/{{audiobook.0}}"><img class="card-img-top" height="300px"  src={{url_for("static", filename=img)}} alt=""></a>
+          <div class="card-body">
 
-            <h3 class="font-weight-light"><a href="single-post.html">{{ audio[1] }}</a></h3>
-            <div class="text-white mb-3"><span class="text-black-opacity-05"><small>By {{audio[5]}} <span
-                    class="sep">/</span> {{ audio[6]}} <span class="sep"></span> </small></span></div>
-            <p class="mb-4">{{ audio.2[0:200] }}....</p>
-
-
-            <div class="player">
-              <audio id="player2" preload="none" controls style="max-width: 100%">
-                {% set audio="image/" +audio.4 %}
-                <source src={{url_for("static", filename=audio)}} type="audio/mp3">
-              </audio>
-            </div>
-
+            <h4 class="card-title">
+              <a href="/single_audiobook/{{audiobook.0}}">{{audiobook.1}}</a>
+            </h4>
+            <p class="card-text">{{audiobook.2[0:150]}}......</p>
+            <h6 style="text-transform:uppercase;">{{audiobook.8}}</h6>
           </div>
         </div>
       </div>
       {% endif %}
-    {% endfor %}
+      {% endfor %}
 
     </div>
   </div>
-</div>
+</div> -->
 
 
 

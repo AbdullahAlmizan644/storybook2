@@ -8,6 +8,7 @@ from datetime import datetime
 from flask_mail import Mail,Message
 from random import randint
 
+
 auth=Blueprint('auth',__name__)
 mail=Mail()
 app=create_app()
@@ -118,7 +119,11 @@ def profile():
         cur=db.connection.cursor() 
         cur.execute("select * from users where username=%s",(session["user"],))
         user=cur.fetchone()
-        return render_template("auth/profile.html",user=user)
+
+        cur=db.connection.cursor()  
+        cur.execute("SELECT count(post_id) from blog where writer=%s",(session["user"],))
+        total_post=cur.fetchone()
+        return render_template("auth/profile.html",user=user,total_post=total_post)
 
     else:
         return redirect("/login")
@@ -158,5 +163,10 @@ def edit_profile(id):
 def user_logout():
     session.pop("user",None)
     return redirect("/")
+
+
+
+
+
 
 

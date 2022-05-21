@@ -1,0 +1,44 @@
+{% extends "user_dashboard/base.html" %}
+{% block title %}Write Post{% endblock%}
+{% block head %}
+{{super()}}
+<style>
+
+</style>
+{% endblock %}
+
+{% block content %}
+{{ ckeditor.load() }}
+
+
+
+<div class="col-lg-12">
+
+    <div class="card mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Write post</h6>
+        </div>
+        <div class="card-body">
+            <form action="/write_post" method="post" id="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Titles</label>
+                    <input type="text" name="name" class="form-control" id="exampleFormControlInput1" placeholder="title">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Story</label>
+                    {{ckeditor.create()}}
+                    <!-- <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea> -->
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-10">
+                        <button type="submit" form="post" class="btn btn-primary">Post</button>
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+
+    {% endblock %}

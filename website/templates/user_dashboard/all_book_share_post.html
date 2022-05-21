@@ -1,0 +1,117 @@
+{% extends "user_dashboard/base.html" %}
+{% block title %}User Dashboard{% endblock%}
+{% block head %}
+{{super()}}
+<style>
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- Container Fluid-->
+<div class="container-fluid" id="container-wrapper">
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Book share</h1>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page"> user Dashboard</li>
+    </ol>
+  </div>
+
+  <div class="row mb-3">
+    <!-- Earnings (Monthly) Card Example -->
+
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-uppercase mb-1">User Total book share Post</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">{{total_book_share[0]}}</div>
+              <!-- <div class="mt-2 mb-0 text-muted text-xs">
+                <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                <span>Since last month</span>
+              </div> -->
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-shopping-cart fa-2x text-primary"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="col mr-2">
+              <!-- <div class="text-xs font-weight-bold text-uppercase mb-1">share book</div> -->
+              <div class="h5 mb-0 font-weight-bold text-gray-800"><a href="/book_share_post"><button class="btn btn-sm btn-primary">Write Post</button></a></div>
+              <!-- <div class="mt-2 mb-0 text-muted text-xs">
+                <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                <span>Since last month</span>
+              </div> -->
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-list fa-2x text-primary"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Invoice Example -->
+    <div class="col-xl-12 col-lg-7 mb-4">
+      <div class="card">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="m-0 font-weight-bold text-primary">Book sharing table</h6>
+          <!-- <a class="m-0 float-right btn btn-danger btn-sm" href="#">View More <i class="fas fa-chevron-right"></i></a> -->
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th>SHARE ID</th>
+                <th>BOOK NAME</th>
+                <th>BOOK IMAGE</th>
+                <th>DETAILS</th>
+                <th>PHONE</th>
+                <th>DATE</th>
+                <th>EDIT</th>
+                <th>DELETE</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for post in posts %}
+              <tr>
+                <td><a href="#">{{post.0}}</a></td>
+                <td>{{post.4}}</td>
+                <td>{{post.5}}...</td>
+                <td>{{post.6[0:20]|safe}}</td>
+                <td>{{post.7}}</td>
+                <td>{{post.8}}...</td>
+                <td><a href="/edit_book_share_post/{{post.0}}" class="btn btn-sm btn-primary">Edit</a></td>
+                <td><a href="/delete_book_share_post/{{post.0}}" class="btn btn-sm btn-danger">Delete</a></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer"></div>
+      </div>
+    </div>
+
+  </div>
+  <!--Row-->
+
+
+</div>
+<!---Container Fluid-->
+</div>
+
+{% endblock %}
