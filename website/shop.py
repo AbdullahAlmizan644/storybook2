@@ -98,14 +98,14 @@ def checkout():
             phone=request.form.get("phone")
             notes=request.form.get("notes")
             payment=request.form.get("payment")
-            product=request.form.get("product_details")
+            # product=request.form.get("all")
             total=request.form.get("total")
 
             cur=db.connection.cursor() 
-            cur.execute("INSERT INTO orders(username,email,phone,address,state,zip,order_note,product_details,payment_method,date,order_total) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(user[1],user[2],phone,address,state,zip,notes,product,payment,datetime.now(),total,))
+            cur.execute("INSERT INTO orders(username,email,phone,address,state,zip,order_note,payment_method,date,order_total) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(user[1],user[2],phone,address,state,zip,notes,payment,datetime.now(),total,))
             db.connection.commit()
             cur.close()
-            m=f"Product:{product} Address:{address} Total Price:{total}"
+            m=f"Address:{address} Total Price:{total}"
 
             msg = Message("Book Order",sender="dekbovideo@gmail.com",recipients=[user[2]])
             msg.html = f'<h1>Your Order Taken<h1><br><h2>{m}</h2>'  

@@ -245,6 +245,8 @@
                   </tr>
                   <tr>
                     <td class="text-black font-weight-bold"><strong>Order Total</strong></td>
+                    <input type="hidden" name="total" id="totalCost">
+                    <input type="hidden" name="all" id="all">
                     <td class="text-black font-weight-bold"><strong id="totalPrice">0</strong><span> Tk</span></td>
                   </tr>
                 </tbody>
@@ -274,6 +276,7 @@
                 </label>
                 <img height="50px" width="80px" src={{url_for("static", filename="image/nogod.png")}} alt="">
               </div><br>
+
 
               <!-- <div class="border p-3 mb-3">
                 <h3 class="h6 mb-0"><a class="d-block" data-toggle="collapse" href="#collapsebank" role="button"
@@ -329,6 +332,7 @@
 
 <script>
 
+  let catchProduct=[];
 
 
   function updateHtml() {
@@ -361,6 +365,7 @@
   function subTotalPlus() {
     const subTotal = document.querySelector("#subTotal");
     const totalPrice = document.querySelector("#totalPrice");
+    const totalCost = document.querySelector("#totalCost");
     // let productTotal=JSON.parse(localStorage.getItem('product'));
     // let sum=0;
     // for(let i=0;i<productTotal.length;i++){
@@ -372,14 +377,28 @@
     let catchTotal = localStorage.getItem('subTotal');
     subTotal.innerHTML = catchTotal;
     totalPrice.innerHTML = parseInt(catchTotal) + 50;
+    totalCost.value=parseInt(catchTotal)+50
+    getValue();
+  }
+
+  function getValue(){
+
+    const catchValue =localStorage.getItem('product');
+
+
+
+
+    const all=document.getElementById("all");
+    all.value=catchValue;
 
   }
 
 
+
   function tableRow(productName, price, quantity) {
     return `<tr>
-      <input type="hidden" value="${productName},${quantity}" name="product_details">
-      <input type="hidden" value="${price}" name="total">
+      <input type="hidden" value="${productName},${quantity},${price}" name="product_details">
+      <input type="hidden" value="${price}">
       <input type="hidden" value="${quantity}" name="product">
       <td>${productName}<strong class="mx-2">x</strong>${quantity}</td>
       <td>${price}</td>

@@ -1,0 +1,97 @@
+{% extends "admin/base.html" %}
+{% block title %}user{% endblock %}
+{% block head %}
+{{ super() }}
+<style>
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<main class="content">
+    <div class="container-fluid p-0">
+
+        <h1 class="h3 mb-3"><strong>Users</strong></h1>
+
+        <div class="row">
+            <div class="col-xl-6 col-xxl-5 d-flex">
+                <div class="w-100">
+                    <div class="row">
+                        <div class="col-sm-6">
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col mt-0">
+                                            <h5 class="card-title">Total rents</h5>
+                                        </div>
+
+                                        <div class="col-auto">
+                                            <div class="stat text-primary">
+                                                <i class="align-middle" data-feather="users"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h1 class="mt-1 mb-3">{{ total_rents[0] }}</h1>
+                                    <!-- <div class="mb-0">
+                                        <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -2.25%
+                                        </span>
+                                        <span class="text-muted">Since last week</span>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-12 col-lg-8 col-xxl-12 d-flex">
+                    <div class="card flex-fill">
+                        <div class="card-header">
+
+                            <h5 class="card-title mb-0">User</h5>
+                        </div>
+                         <table class="table table-hover my-0">
+                            <thead>
+                                <tr>
+                                    <th class="d-none d-xl-table-cell">rent id</th>
+                                    <th class="d-none d-xl-table-cell">username</th>
+                                    <th class="d-none d-xl-table-cell">email</th>
+                                    <th class="d-none d-xl-table-cell">phone</th>
+                                    <th class="d-none d-xl-table-cell">address</th>
+                                    <th class="d-none d-xl-table-cell">rent charge</th>
+                                    <th class="d-none d-xl-table-cell">payment method</th>
+                                    <th class="d-none d-xl-table-cell">Book name</th>
+                                    <th class="d-none d-xl-table-cell">date</th>
+                                    <th>remove</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for rent in rents%}
+                                <tr>
+                                    <td>{{ rent.0 }}</td>
+                                    <td class="d-none d-xl-table-cell">{{ rent.1 }}</td>
+                                    <td class="d-none d-xl-table-cell">{{ rent.2 }}</td>
+                                    <td class="d-none d-xl-table-cell">{{ rent.3 }}</td>
+                                    <td class="d-none d-xl-table-cell">{{ rent.4 }}</td>
+                                    <td class="d-none d-xl-table-cell">{{ rent.5 }}</td>
+                                    <td class="d-none d-xl-table-cell">{{ rent.6 }}</td>
+                                    <td class="d-none d-xl-table-cell">{{ rent.7 }}</td>
+                                    <td class="d-none d-xl-table-cell">{{ rent.8 }}</td>
+                                    <td><a href="/delete_rent/{{rent.0}}"><span class="badge bg-danger">Block</span></a></td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+</main>
+
+{% endblock %}

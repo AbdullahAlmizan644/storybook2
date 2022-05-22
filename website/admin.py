@@ -69,7 +69,11 @@ def dashboard():
         cur.execute("SELECT count(book_id) from books ")
         total_books=cur.fetchone()
 
-        return render_template("admin/index.html",total_users=total_users,total_audiobooks=total_audiobooks,total_podcasts=total_podcasts,total_books=total_books)
+        cur=db.connection.cursor()
+        cur.execute("SELECT * FROM suscriber")
+        subscribers=cur.fetchall()
+
+        return render_template("admin/index.html",total_users=total_users,total_audiobooks=total_audiobooks,total_podcasts=total_podcasts,total_books=total_books,subscribers=subscribers)
     else:
         return redirect("/admin_login")
 
@@ -280,6 +284,7 @@ def add_podcast():
             name=request.form.get("name")
             description=request.form.get("description")
             podcaster=request.form.get("podcaster")
+            type=request.form.get("type")
 
             image = request.files['image']
             audio = request.files['audio']
@@ -290,7 +295,7 @@ def add_podcast():
                 image.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(image.filename)))
                 audio.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(audio.filename)))
                 cur=db.connection.cursor()
-                cur.execute("INSERT INTO podcast(name,description,podcaster,image,audio,date) VALUES (%s,%s,%s,%s,%s,%s)",(name,description,podcaster,image.filename,audio.filename,datetime.now()))
+                cur.execute("INSERT INTO podcast(name,description,podcaster,image,audio,date,type) VALUES (%s,%s,%s,%s,%s,%s,%s)",(name,description,podcaster,image.filename,audio.filename,datetime.now(),type,))
                 db.connection.commit()
                 return redirect("/all_podcast")
         return render_template("admin/add_podcast.html")
@@ -360,3 +365,81 @@ def add_book():
     
     else:
         return redirect("/admin_login")
+
+
+
+
+
+@admin.route("/all_order_dashboard")
+def all_order_in_admin():
+    if "admin" in session:
+        cur=db.connection.cursor()
+        cur.execute("SELECT * FROM orders")
+        orders=cur.fetchall()
+
+        cur=db.connection.cursor()  
+        cur.execute("SELECT count(order_id) from orders")
+        total_orders=cur.fetchone()
+        return render_template("admin/orders.html",orders=orders,total_orders=total_orders)
+    else:
+        return redirect("/admin_login")
+
+
+
+@admin.route("/delete_order_dashboard/<int:id>")
+def delete_order_dashboard(id):
+    if "admin" in session:
+        cur=db.connection.cursor()
+        cur.execute("DELETE FROM orders WHERE order_id=%s",(id,))
+        db.connection.commit()
+        return redirect("/all_order_dashboard")
+    
+    else:
+        return redirect("/admin_login")
+
+
+
+
+@admin.route("/all_rent_book")
+def all_rent_book():
+    if "admin" in session:
+        cur=db.connection.cursor()
+        cur.execute("SELECT * FROM rents")
+        rents=cur.fetchall()
+
+        cur=db.connection.cursor()  
+        cur.execute("SELECT count(rent_id) from rents ")
+        total_rents=cur.fetchone()
+        return render_template("admin/rent.html",rents=rents,total_rents=total_rents)
+    else:
+        return redirect("/admin_login")
+
+
+
+
+# @admin.route("/all_suscriber_dashboard")
+# def all_subscriber_dashboard():
+#     if "admin" in session:
+#         cur=db.connection.cursor()
+#         cur.execute("SELECT * FROM subscriber")
+#         subscribers=cur.fetchall()
+
+#         cur=db.connection.cursor()  
+#         cur.execute("SELECT count(subscriber_no) from subscriber")
+#         total_subscribers=cur.fetchone()
+#         return render_template("admin/subscriber.html",subscribers=subscribers,total_subscribers=total_subscribers)
+#     else:
+#         return redirect("/admin_login")
+
+
+@admin.route("/delete_subscriber/<int:id>")
+def delete_subscriber(id):
+    if "admin" in session:
+        cur=db.connection.cursor()
+        cur.execute("DELETE FROM suscriber WHERE suscriber_no=%s",(id,))
+        db.connection.commit()
+        return redirect("/dashboard")
+    
+    else:
+        return redirect("/admin_login")
+

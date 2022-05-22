@@ -1,5 +1,5 @@
 {% extends "admin/base.html" %}
-{% block title %}Search AudioBooks{% endblock %}
+{% block title %}Audiobooks{% endblock %}
 {% block head %}
 {{ super() }}
 <style>
@@ -12,7 +12,7 @@
 <main class="content">
     <div class="container-fluid p-0">
 
-        <h1 class="h3 mb-3"><strong>Audiobooks</strong></h1>
+        <h1 class="h3 mb-3"><strong>Podcast</strong></h1>
 
         <div class="row">
             <div class="col-xl-6 col-xxl-5 d-flex">
@@ -25,7 +25,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col mt-0">
-                                            <h5 class="card-title">Total Audiobook</h5>
+                                            <h5 class="card-title">Total podcast</h5>
                                         </div>
 
                                         <div class="col-auto">
@@ -59,7 +59,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="/add_audiobook" class="btn btn-info btn-lg">Add Audiobook</a>
+                                    <a href="/add_audiobook" class="btn btn-info btn-lg">Add audiobook</a>
                                     <!-- <h1 class="mt-1 mb-3"></h1> -->
                                     <!-- <div class="mb-0">
                                         <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 6.65%
@@ -106,8 +106,8 @@
                             <tr>
                                 <td class="d-none d-xl-table-cell">{{ book.0}}</td>
                                 <td class="d-none d-xl-table-cell">{{ book.1}}</td>
-                                <td class="d-none d-xl-table-cell">{{ book.2[0:100]}}</td>
-                                <td class="d-none d-xl-table-cell">{{ book.3}}</td>
+                                <td class="d-none d-xl-table-cell">{{ book.2[0:5]}}..</td>
+                                <td class="d-none d-xl-table-cell">{{ book.3[0:5]}}...</td>
                                 <td class="d-none d-xl-table-cell">{{ book.4}}</td>
                                 <td class="d-none d-xl-table-cell">{{ book.5}}</td>
                                 <td class="d-none d-xl-table-cell">{{ book.6}}</td>

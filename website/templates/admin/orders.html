@@ -1,0 +1,100 @@
+{% extends "admin/base.html" %}
+{% block title %}Order{% endblock %}
+{% block head %}
+{{ super() }}
+<style>
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<main class="content">
+    <div class="container-fluid p-0">
+
+        <h1 class="h3 mb-3"><strong>orders</strong></h1>
+
+        <div class="row">
+            <div class="col-xl-6 col-xxl-5 d-flex">
+                <div class="w-100">
+                    <div class="row">
+                        <div class="col-sm-6">
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col mt-0">
+                                            <h5 class="card-title">Total orders</h5>
+                                        </div>
+
+                                        <div class="col-auto">
+                                            <div class="stat text-primary">
+                                                <i class="align-middle" data-feather="users"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h1 class="mt-1 mb-3">{{total_orders[0]}}</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-12 col-lg-8 col-xxl-12 d-flex">
+                    <div class="card flex-fill">
+                        <div class="card-header">
+
+                            <h5 class="card-title mb-0">order</h5>
+                        </div>
+                         <table class="table table-hover my-0">
+                            <thead>
+                                <tr>
+                                    <th class="d-none d-xl-table-cell">order id</th>
+                                    <th class="d-none d-xl-table-cell">username</th>
+                                    <th class="d-none d-xl-table-cell">email</th>
+                                    <th class="d-none d-xl-table-cell">phone</th>
+                                    <th class="d-none d-xl-table-cell">address</th>
+                                    <th class="d-none d-xl-table-cell">state</th>
+                                    <th class="d-none d-xl-table-cell">zip</th>
+                                    <th class="d-none d-xl-table-cell">order note</th>
+                                    <th class="d-none d-xl-table-cell">product details</th>
+                                    <th class="d-none d-xl-table-cell">order total</th>
+                                    <th class="d-none d-xl-table-cell">payment method</th>
+                                    <th class="d-none d-xl-table-cell">Date</th>
+                                    <th class="d-none d-xl-table-cell">Accept order</th>
+                                    <th class="d-none d-xl-table-cell">Cancel order</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for order in orders %}
+                                <tr>
+                                    <td>{{ order.0 }}</td>
+                                    <td class="d-none d-xl-table-cell">{{ order.1 }}</td>
+                                    <td class="d-none d-xl-table-cell">{{ order.2 }}</td>
+                                    <td class="d-none d-xl-table-cell">{{ order.3 }}</td>
+                                    <td class="d-none d-xl-table-cell">{{ order.4 }}</td>
+                                    <td class="d-none d-xl-table-cell">{{ order.5 }}</td>
+                                    <td class="d-none d-xl-table-cell">{{ order.6 }}</td>
+                                    <td class="d-none d-xl-table-cell">{{ order.7 }}</td>
+                                    <td class="d-none d-xl-table-cell">{{ order.8 }}</td>
+                                    <td class="d-none d-xl-table-cell">{{ order.9[0] }}</td>
+                                    <td class="d-none d-xl-table-cell">{{ order.10 }}</td>
+                                    <td class="d-none d-xl-table-cell">{{ order.11 }}</td>
+                                    <td><a href="/delete_order/{{order.0}}"><span class="badge bg-success">accept</span></a></td>
+                                    <td><a href="/delete_order_dashboard/{{order.0}}"><span class="badge bg-danger">cancel</span></a></td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+</main>
+
+{% endblock %}
