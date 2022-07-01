@@ -25,12 +25,45 @@ def shops():
 
 
 
-@shop.route("/book_details/<int:sno>/<int:count>")
+@shop.route("/book_details/<int:sno>/<int:count>",methods=["GET","POST"])
 def book_details(sno,count):
     cur=db.connection.cursor()
     cur.execute("SELECT * FROM books where book_id=%s",(sno,))    
     book=cur.fetchone()
-    return render_template("shop/book_details.html",book=book,count=count)
+
+    cur=db.connection.cursor()
+    cur.execute("select * from comments where post_id=%s",(sno,))
+    user_comment=cur.fetchall()
+
+    if request.method=="POST":
+        comment=request.form.get("comment")
+        if "user" in session:
+            cur=db.connection.cursor()
+            cur.execute("select * from users where username=%s",(session["user"],))
+            user=cur.fetchone()
+            cur.close()
+        
+            cur=db.connection.cursor()
+            cur.execute("insert into comments(comment,writer,image,post_id,date)values(%s,%s,%s,%s,%s)",(comment,user[1],user[3],sno,datetime.now(),))
+            db.connection.commit()
+            return redirect(request.url)
+        else:
+            return redirect("/login")
+    return render_template("shop/book_details.html",book=book,count=count,user_comment=user_comment)
+
+
+@shop.route("/search_book",methods=["GET","POST"])
+def search_book():
+    if request.method=="POST":
+        search_book=request.form.get("search_book")
+
+        cur=db.connection.cursor()
+        cur.execute(f"SELECT * FROM books where name LIKE '%{search_book}%' ")
+        books=cur.fetchall()
+
+        return render_template("shop/search_book.html",books=books,search_book=search_book)
+
+
 
 
 @shop.route("/book_category/<string:cat>")
@@ -98,11 +131,11 @@ def checkout():
             phone=request.form.get("phone")
             notes=request.form.get("notes")
             payment=request.form.get("payment")
-            # product=request.form.get("all")
+            product=request.form.get("product_details")
             total=request.form.get("total")
 
             cur=db.connection.cursor() 
-            cur.execute("INSERT INTO orders(username,email,phone,address,state,zip,order_note,payment_method,date,order_total) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(user[1],user[2],phone,address,state,zip,notes,payment,datetime.now(),total,))
+            cur.execute("INSERT INTO orders(username,email,phone,address,state,zip,order_note,payment_method,date,order_total,product_details) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(user[1],user[2],phone,address,state,zip,notes,payment,datetime.now(),total,product,))
             db.connection.commit()
             cur.close()
             m=f"Address:{address} Total Price:{total}"

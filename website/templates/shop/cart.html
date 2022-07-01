@@ -161,7 +161,7 @@ function updateHtml(){
   plus.forEach((item,index)=>{
     item.addEventListener('click',()=>{
       if(quantityInput[index].value>=5){
-        alert("you stupid! etto gula boi kina ki korbi...");
+        alert("you cannot buy more than 5 item on any product if you want contact with us");
         quantityInput[index].value=5;
         value[index].quantity=5;
         value[index].total=value[index].price*value[index].quantity;
@@ -254,7 +254,7 @@ function updateHtml(){
 function tableRow(image,name,price,quantity,total){
   return `<tr>
                 <td class="product-thumbnail">
-                  <img src="static/image/${image}" alt="Image" class="img-fluid">
+                  <img src="static/image/${image}"  alt="Image" class="img-fluid">
                 </td>
                 <td class="product-name">
                   <h2 class="h5 text-black">${name}</h2>

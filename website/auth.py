@@ -16,6 +16,11 @@ app=create_app()
 otp=randint(0000,9999)
 
 
+@auth.route("/login_signup")
+def login_signup():
+    return render_template("auth/login_signup.html")
+
+
 @auth.route("/signup", methods=["GET","POST"])
 def signup():
     if request.method=="POST":

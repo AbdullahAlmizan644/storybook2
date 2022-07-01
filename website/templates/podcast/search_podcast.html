@@ -1,5 +1,5 @@
 {% extends "podcast/base.html"%}
-{% block title %}Podcast {% endblock%}
+{% block title %}Search Podcasts{% endblock%}
 {% block head %}
 {{ super() }}
 <style>
@@ -10,21 +10,26 @@
 
 
 
-
 <!-- Page Content -->
 <div class="container">
-  <div id="custom-search-input">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/podcast">Podcast</a></li>
+      <li class="breadcrumb-item"><a href="#">Search Result</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{search_podcast}}</li>
+    </ol>
+  </nav>
+  <!-- <div id="custom-search-input">
     <form id="audio" action="/search_podcast" method="post">
     <div class="input-group col-md-12">
-      <input type="text" name="search_podcast" class="search-query form-control" placeholder="Search Podcast" />
-      <!-- <button form="audio" style="height:20px;" class="btn btn-warning btn-sm ">Search</button> -->
+      <input type="text" class="search-query form-control" name="search_audio" placeholder="Search Podcast" />
     </div>
     </form>
-  </div>  <br>
+  </div> -->
   <!-- Page Heading -->
-  <!-- <h1 class="my-4">Page Heading
-    <small>Secondary Text</small>
-  </h1> -->
+  <h1 class="my-4">Search Result
+    <small>"{{search_podcast}}"</small>
+  </h1>
 
   <div class="row">
     {% for podcast in podcasts %}
@@ -132,33 +137,9 @@
   </div>
   <!-- /.row -->
 
-  <!-- Pagination -->
-  <ul class="pagination justify-content-center">
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-        <span class="sr-only">Previous</span>
-      </a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" href="#">1</a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" href="#">2</a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" href="#">3</a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-        <span class="sr-only">Next</span>
-      </a>
-    </li>
-  </ul>
 
 </div>
 
-
+<div style="margin: 300px;"></div>
 
 {% endblock %}

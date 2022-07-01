@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template,redirect,session
+from flask import Blueprint, render_template,redirect,session,request
 from website.__init__ import db
 
 podcast=Blueprint('podcast',__name__)
@@ -49,3 +49,17 @@ def podcaster(name):
     cur.execute("SELECT * FROM podcast where podcaster=%s",(name,))
     podcasts=cur.fetchall()
     return render_template("podcast/podcaster.html",podcasts=podcasts)
+
+
+
+
+@podcast.route("/search_podcast",methods=["GET","POST"])
+def search_podcast():
+    if request.method=="POST":
+        search_podcast=request.form.get("search_podcast")
+
+        cur=db.connection.cursor()
+        cur.execute(f"SELECT * FROM podcast where name LIKE '%{search_podcast}%' ")
+        podcasts=cur.fetchall()
+
+        return render_template("podcast/search_podcast.html",podcasts=podcasts,search_podcast=search_podcast)
